@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>M-2-8 金澤職人夢｜17日見習行程與機構查閱</title>
+  <title>M-2-8 金澤職人夢｜17日見習行程・景點・清單・記帳手冊</title>
   <!-- 引入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入 Google Fonts：思源宋體 (Noto Serif TC) 與 思源黑體 (Noto Sans TC) 營造日式工藝質感 -->
@@ -16,18 +16,20 @@
       theme: {
         extend: {
           colors: {
-            washi: '#FAF8F5',       // 和紙米白底色
-            washiDark: '#F2EDE4',   // 次要和紙區塊底色
+            washi: '#FAF7F2',       // 和紙米白底色
+            washiDark: '#F0EAE0',   // 次要和紙區塊底色
             sumi: '#1E1E1E',        // 深墨黑主文字
             sumiLight: '#57534E',   // 淡墨次要文字
             kutani: '#1D3557',      // 九谷燒深藍 (吳須藍)
             kutaniLight: '#EBF0F5', // 九谷淺藍底
-            shu: '#C13832',         // 傳統朱紅 (印章/赤繪紅)
+            shu: '#B22D2D',         // 漆器朱紅 (印章/赤繪紅)
             shuLight: '#FDF1F0',    // 淺朱紅底
             kinpaku: '#C5A059',     // 金澤金箔色
-            kinpakuDark: '#9A7835', // 深金箔色
-            kinpakuLight: '#FBF7EE',// 淡金箔底色
+            kinpakuDark: '#967430', // 深金箔色
+            kinpakuLight: '#FBF6EB',// 淡金箔底色
             urushi: '#4A2511',      // 山中漆器栗皮色
+            midori: '#2E6F40',      // 九谷五彩・綠彩
+            midoriLight: '#EDF6F0', // 淺綠彩底
           },
           fontFamily: {
             serif: ['"Noto Serif TC"', 'serif'],
@@ -35,7 +37,7 @@
           },
           boxShadow: {
             'washi': '0 4px 16px -2px rgba(29, 53, 87, 0.06), 0 1px 4px -1px rgba(0, 0, 0, 0.04)',
-            'gold': '0 4px 14px -2px rgba(197, 160, 89, 0.25)',
+            'nav': '0 -4px 16px -2px rgba(30, 30, 30, 0.08)',
           }
         }
       }
@@ -46,16 +48,16 @@
     /* 基礎和紙紋理與平滑捲動設定 */
     html {
       scroll-behavior: smooth;
-      background-color: #FAF8F5;
+      background-color: #FAF7F2;
       color: #1E1E1E;
       font-family: 'Noto Sans TC', sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background-color: #FAF8F5;
+      background-color: #FAF7F2;
       /* 細微和紙纖維點狀質感 */
-      background-image: radial-gradient(rgba(197, 160, 89, 0.14) 1px, transparent 0),
+      background-image: radial-gradient(rgba(197, 160, 89, 0.16) 1px, transparent 0),
                         radial-gradient(rgba(29, 53, 87, 0.06) 1px, transparent 0);
       background-size: 28px 28px;
       background-position: 0 0, 14px 14px;
@@ -74,65 +76,71 @@
     .gold-foil-gradient {
       background: linear-gradient(135deg, #D9B973 0%, #C5A059 45%, #E5C989 75%, #B08B43 100%);
     }
-    
-    .gold-foil-border {
-      border: 1px solid rgba(197, 160, 89, 0.45);
-    }
 
-    /* 卡片展開動畫 */
-    .accordion-content {
-      transition: all 0.25s ease-in-out;
-    }
-
-    /* 閃爍高亮動畫（從機構跳轉至行程時觸發） */
+    /* 閃爍高亮動畫（從景點跳轉至行程時觸發） */
     @keyframes highlightPulse {
-      0% { box-shadow: 0 0 0 0 rgba(193, 56, 50, 0.6); transform: scale(1.01); }
-      50% { box-shadow: 0 0 0 8px rgba(193, 56, 50, 0); transform: scale(1.01); }
-      100% { box-shadow: 0 0 0 0 rgba(193, 56, 50, 0); transform: scale(1); }
+      0% { box-shadow: 0 0 0 0 rgba(178, 45, 45, 0.6); transform: scale(1.01); }
+      50% { box-shadow: 0 0 0 8px rgba(178, 45, 45, 0); transform: scale(1.01); }
+      100% { box-shadow: 0 0 0 0 rgba(178, 45, 45, 0); transform: scale(1); }
     }
     .highlight-card {
       animation: highlightPulse 1.4s ease-out;
-      border-color: #C13832 !important;
+      border-color: #B22D2D !important;
+    }
+
+    /* 自訂勾選框動畫 */
+    .custom-checkbox:checked {
+      background-color: #2E6F40;
+      border-color: #2E6F40;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col items-center pb-16">
+<body class="min-h-screen flex flex-col items-center pb-24">
 
   <!-- 主容器：限制最大寬度以兼顧手機全螢幕與平板/桌面置中閱讀體驗 -->
-  <div class="w-full max-w-2xl bg-washi/95 min-h-screen shadow-washi border-x border-kinpaku/20 flex flex-col">
+  <div class="w-full max-w-2xl bg-washi/95 min-h-screen shadow-washi border-x border-kinpaku/25 flex flex-col">
 
     <!-- 1. 頂部標題區 (日式工藝視覺) -->
-    <header class="relative overflow-hidden bg-kutani text-washi px-5 pt-6 pb-5">
+    <header class="relative overflow-hidden bg-kutani text-washi px-5 pt-5 pb-4">
       <!-- 背景幾何裝飾：象徵九谷五彩與金箔圓紋 -->
       <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full border border-kinpaku/30 opacity-40 pointer-events-none"></div>
       <div class="absolute -right-3 -top-3 w-24 h-24 rounded-full gold-foil-gradient opacity-15 pointer-events-none"></div>
       <div class="absolute left-0 top-0 w-full h-1 gold-foil-gradient"></div>
 
       <!-- 計畫系列標籤 -->
-      <div class="flex items-center justify-between gap-2 mb-2">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/10 text-kinpaku border border-kinpaku/40">
+      <div class="flex items-center justify-between gap-2 mb-1.5">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/10 text-kinpaku border border-kinpaku/40">
           <span class="w-1.5 h-1.5 rounded-full bg-kinpaku"></span>
           青年百億海外圓夢基金計畫・海外翱翔組
         </span>
-        <span class="text-[11px] text-white/70 font-mono tracking-wider">M-2-8</span>
+        <span class="text-[11px] text-white/75 font-mono tracking-wider">M-2-8</span>
       </div>
 
       <!-- 主標題與朱紅印章 -->
-      <div class="flex items-center gap-3 my-1.5">
-        <h1 class="font-serif text-2xl sm:text-3xl font-black tracking-wide text-white leading-tight">
-          M-2-8 金澤職人夢
-        </h1>
-        <!-- 日式落款印章 -->
-        <span class="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded bg-shu text-white font-serif text-xs font-bold border border-white/30 shadow-sm select-none" title="石川工藝">
-          職人
-        </span>
+      <div class="flex items-center justify-between gap-2 my-1">
+        <div class="flex items-center gap-2.5">
+          <h1 class="font-serif text-2xl sm:text-3xl font-black tracking-wide text-white leading-tight">
+            M-2-8 金澤職人夢
+          </h1>
+          <span class="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded bg-shu text-white font-serif text-xs font-bold border border-white/30 shadow-sm select-none" title="石川工藝">
+            職人
+          </span>
+        </div>
+        <!-- 計畫須知快速按鈕 -->
+        <button onclick="openInfoModal()" class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-white text-xs font-medium border border-white/20 transition-colors">
+          <svg class="w-3.5 h-3.5 text-kinpaku" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span>簡章須知</span>
+        </button>
       </div>
 
       <!-- 期間與地點資訊列 -->
-      <div class="mt-3 pt-2.5 border-t border-white/15 flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs sm:text-sm text-white/90">
+      <div class="mt-2.5 pt-2 border-t border-white/15 flex flex-wrap items-center gap-y-1 gap-x-3 text-xs text-white/90">
         <span class="inline-flex items-center gap-1.5 font-medium">
-          <!-- 日曆圖示 -->
-          <svg class="w-4 h-4 text-kinpaku shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-3.5 h-3.5 text-kinpaku shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="16" y1="2" x2="16" y2="6"></line>
             <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -142,8 +150,7 @@
         </span>
         <span class="text-white/40 hidden sm:inline">|</span>
         <span class="inline-flex items-center gap-1.5 font-medium">
-          <!-- 地標圖示 -->
-          <svg class="w-4 h-4 text-kinpaku shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-3.5 h-3.5 text-kinpaku shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
@@ -152,45 +159,13 @@
       </div>
     </header>
 
-    <!-- 2. 分頁導覽列 (Sticky 固定於頂部，方便單手切換) -->
-    <nav id="sticky-nav" class="sticky top-0 z-30 bg-washi/95 backdrop-blur-md border-b border-kinpaku/30 shadow-sm">
-      <div class="grid grid-cols-3 text-center">
-        <button onclick="switchTab('itinerary')" id="tab-btn-itinerary"
-          class="tab-btn py-3.5 px-2 text-sm font-bold flex items-center justify-center gap-1.5 border-b-2 border-shu text-kutani transition-colors">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
-          </svg>
-          <span>每日行程</span>
-        </button>
-
-        <button onclick="switchTab('institutions')" id="tab-btn-institutions"
-          class="tab-btn py-3.5 px-2 text-sm font-medium flex items-center justify-center gap-1.5 border-b-2 border-transparent text-sumiLight hover:text-kutani transition-colors">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"></path>
-          </svg>
-          <span>見習機構</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-kinpakuLight text-kinpakuDark font-bold border border-kinpaku/30">7</span>
-        </button>
-
-        <button onclick="switchTab('info')" id="tab-btn-info"
-          class="tab-btn py-3.5 px-2 text-sm font-medium flex items-center justify-center gap-1.5 border-b-2 border-transparent text-sumiLight hover:text-kutani transition-colors">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <span>行前與須知</span>
-        </button>
-      </div>
-    </nav>
-
     <!-- ========================================== -->
     <!-- 分頁一：【每日行程】                         -->
     <!-- ========================================== -->
     <main id="view-itinerary" class="flex-1 flex flex-col">
       
-      <!-- 搜尋與控制工具列 -->
-      <div class="px-4 pt-4 pb-2 space-y-3 bg-washiDark/60 border-b border-kinpaku/20">
+      <!-- 搜尋與控制工具列 (Sticky 頂部工具列) -->
+      <div id="sticky-itinerary-tools" class="sticky top-0 z-20 px-4 pt-3 pb-2 space-y-2.5 bg-washi/95 backdrop-blur-md border-b border-kinpaku/30 shadow-xs">
         <!-- 關鍵字搜尋框 -->
         <div class="relative">
           <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-sumiLight">
@@ -200,8 +175,8 @@
             </svg>
           </span>
           <input type="text" id="search-input" oninput="handleSearch(this.value)"
-            placeholder="搜尋行程、工法或機構（如：箔一、九谷燒、漆器、自由時間）"
-            class="w-full pl-9 pr-9 py-2.5 text-sm bg-white rounded-xl border border-kinpaku/40 text-sumi placeholder-sumiLight/70 focus:outline-none focus:ring-2 focus:ring-kutani/30 focus:border-kutani shadow-sm" />
+            placeholder="搜尋行程、工法或景點（如：箔一、九谷燒、漆器、東茶屋街）"
+            class="w-full pl-9 pr-9 py-2 text-sm bg-white rounded-xl border border-kinpaku/40 text-sumi placeholder-sumiLight/70 focus:outline-none focus:ring-2 focus:ring-kutani/30 focus:border-kutani shadow-2xs" />
           <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-2.5 flex items-center text-sumiLight hover:text-shu p-1">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -213,26 +188,26 @@
         <!-- 階段篩選器（橫向滑動膠囊按鈕） -->
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
           <button onclick="setStageFilter('all')" data-stage="all"
-            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold bg-kutani text-white shadow-sm transition-all">
+            class="stage-pill shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-kutani text-white shadow-2xs transition-all">
             全部 (17天)
           </button>
           <button onclick="setStageFilter('kaga')" data-stage="kaga"
-            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
-            加賀地區 (D1-D6)
+            class="stage-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
+            加賀階段 (D1-D6)
           </button>
           <button onclick="setStageFilter('transition')" data-stage="transition"
-            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
-            移動與整理 (D7-D8)
+            class="stage-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
+            移動整理 (D7-D8)
           </button>
           <button onclick="setStageFilter('kanazawa')" data-stage="kanazawa"
-            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
-            金澤地區 (D9-D17)
+            class="stage-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
+            金澤階段 (D9-D17)
           </button>
         </div>
 
         <!-- Day 1 ~ Day 17 快速跳轉日期滑動條 -->
-        <div class="pt-1">
-          <div class="flex items-center justify-between mb-1.5">
+        <div>
+          <div class="flex items-center justify-between mb-1">
             <span class="text-[11px] font-medium text-sumiLight flex items-center gap-1">
               <svg class="w-3.5 h-3.5 text-kinpakuDark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <polyline points="13 17 18 12 13 7"></polyline>
@@ -240,7 +215,7 @@
               </svg>
               快速跳轉日期軸
             </span>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5">
               <button onclick="toggleAllDays(true)" class="text-[11px] font-medium text-kutani hover:underline px-1.5 py-0.5 rounded bg-kutaniLight/70">
                 全部展開
               </button>
@@ -249,7 +224,7 @@
               </button>
             </div>
           </div>
-          <div id="day-jump-bar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1.5">
+          <div id="day-jump-bar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
             <!-- 由 JS 動態產生 D1 ~ D17 按鈕 -->
           </div>
         </div>
@@ -283,216 +258,390 @@
     </main>
 
     <!-- ========================================== -->
-    <!-- 分頁二：【見習機構】                         -->
+    <!-- 分頁二：【見習景點】（含 Google Maps 連結）    -->
     <!-- ========================================== -->
-    <section id="view-institutions" class="hidden flex-1 p-4 space-y-4">
-      <!-- 區塊導言 -->
-      <div class="bg-kinpakuLight/80 border border-kinpaku/40 rounded-2xl p-4 shadow-sm">
-        <div class="flex items-center gap-2 mb-1">
-          <span class="w-2 h-5 rounded-full bg-shu"></span>
-          <h2 class="font-serif font-bold text-base text-kutani">石川縣傳統工藝 7 大重點見習機構</h2>
+    <section id="view-spots" class="hidden flex-1 flex flex-col">
+      <!-- 頂部搜尋與區域篩選 -->
+      <div class="sticky top-0 z-20 px-4 pt-3 pb-2.5 space-y-2.5 bg-washi/95 backdrop-blur-md border-b border-kinpaku/30 shadow-xs">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-1.5 h-4 rounded-full bg-shu"></span>
+            <h2 class="font-serif font-bold text-base text-kutani">見習機構與參訪景點導覽（共 18 處）</h2>
+          </div>
+          <span class="text-[11px] font-medium text-kinpakuDark bg-kinpakuLight px-2 py-0.5 rounded-full border border-kinpaku/30">
+            支援 Google Maps
+          </span>
         </div>
-        <p class="text-xs text-sumiLight leading-relaxed">
-          涵蓋金澤金箔、九谷燒（赤繪細描、五彩、金彩、現代窯元）、山中漆器與加賀象嵌等代表性窯元、工房與公設育成機構。點擊「查看當日行程」可直接跳轉至對應見習日。
-        </p>
+
+        <!-- 景點搜尋框 -->
+        <div class="relative">
+          <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-sumiLight">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" id="spot-search-input" oninput="handleSpotSearch(this.value)"
+            placeholder="搜尋景點、工藝或日文名稱（如：箔一、九谷、漆器、美術館）"
+            class="w-full pl-9 pr-8 py-2 text-sm bg-white rounded-xl border border-kinpaku/40 text-sumi placeholder-sumiLight/70 focus:outline-none focus:ring-2 focus:ring-kutani/30" />
+          <button id="clear-spot-search" onclick="clearSpotSearch()" class="hidden absolute inset-y-0 right-2.5 flex items-center text-sumiLight hover:text-shu p-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 區域篩選膠囊 -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+          <button onclick="setSpotCityFilter('all')" data-city="all"
+            class="spot-city-pill shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-kutani text-white shadow-2xs transition-all">
+            全部區域 (18)
+          </button>
+          <button onclick="setSpotCityFilter('金澤市')" data-city="金澤市"
+            class="spot-city-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 transition-all">
+            金澤市 (9)
+          </button>
+          <button onclick="setSpotCityFilter('能美市')" data-city="能美市"
+            class="spot-city-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 transition-all">
+            能美市 (5)
+          </button>
+          <button onclick="setSpotCityFilter('小松市')" data-city="小松市"
+            class="spot-city-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 transition-all">
+            小松市 (2)
+          </button>
+          <button onclick="setSpotCityFilter('加賀市')" data-city="加賀市"
+            class="spot-city-pill shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 transition-all">
+            加賀市 (2)
+          </button>
+        </div>
       </div>
 
-      <!-- 7 大見習機構卡片列表 -->
-      <div id="institutions-list" class="space-y-4">
+      <!-- 景點卡片列表 -->
+      <div id="spots-list" class="p-4 space-y-4">
         <!-- 由 JS 動態渲染 -->
       </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- 分頁三：【行前與須知】                       -->
+    <!-- 分頁三：【行前清單】（可勾選 + 自訂新增）      -->
     <!-- ========================================== -->
-    <section id="view-info" class="hidden flex-1 p-4 space-y-5">
+    <section id="view-checklist" class="hidden flex-1 p-4 space-y-4">
       
-      <!-- 1. 申請資格與錄取名額摘要 -->
-      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
-        <div class="flex items-center justify-between mb-3 pb-2 border-b border-washiDark">
-          <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
-            <span class="w-1.5 h-4 bg-kinpaku rounded-full"></span>
-            計畫基本資訊與資格摘要
-          </h2>
-          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-shuLight text-shu border border-shu/20">
-            見習名額：10 名
-          </span>
-        </div>
-        <ul class="space-y-2 text-xs sm:text-sm text-sumi leading-relaxed">
-          <li class="flex items-start gap-2">
-            <span class="text-kinpakuDark font-bold mt-0.5">●</span>
-            <span><strong>圓夢期間：</strong>民國 116 年 6 月 20 日至 7 月 6 日（含飛行日，共 17 日）。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-kinpakuDark font-bold mt-0.5">●</span>
-            <span><strong>語言要求：</strong>具備基礎日語會話及聽力能力（約 JLPT N4 / CEFR A2 以上，優於 N4 者加分），或具備良好英語溝通能力（約 CEFR B1）。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-kinpakuDark font-bold mt-0.5">●</span>
-            <span><strong>青年義務：</strong>能全程參與海外見習行程，並配合完成成果紀錄、個人紀錄片拍攝與社群宣傳等義務。</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- 2. 行前培訓時程與重點 -->
-      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
+      <!-- 進度概覽卡片 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/40">
         <div class="flex items-center justify-between mb-2">
-          <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
-            <span class="w-1.5 h-4 bg-kutani rounded-full"></span>
-            行前培訓（共 2 次・合計約 8 小時）
-          </h2>
-        </div>
-        <div class="mb-3 px-3 py-2 rounded-xl bg-shuLight border border-shu/25 text-xs text-shu font-medium">
-          ⚠️ 重要規定：若無法參加行前培訓，視同放棄錄取資格。採實體與線上同步進行（暫定臺北市仁美國際會議室 / TAI-ONE SPACE）。
-        </div>
-
-        <div class="space-y-3">
-          <!-- 第1次培訓 -->
-          <div class="p-3.5 rounded-xl bg-washi border border-kinpaku/30">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-sm text-kutani">第 1 次行前培訓</span>
-              <span class="text-xs font-bold px-2 py-0.5 rounded bg-kutaniLight text-kutani">出國前約 14 日（約4小時）</span>
-            </div>
-            <p class="text-xs text-sumi leading-relaxed">
-              海外研修安全與健康管理、當地生活與交通說明、詳細行程與分組確認、行前教材導讀與預習說明。
-            </p>
+          <div>
+            <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
+              <span class="w-1.5 h-4 rounded-full bg-midori"></span>
+              行前準備與裝備檢核清單
+            </h2>
+            <p class="text-xs text-sumiLight mt-0.5">依據簡章行前培訓與工房實作規範整理，自動儲存進度</p>
           </div>
+          <div class="text-right">
+            <span id="checklist-percent" class="font-serif text-xl font-black text-midori">0%</span>
+            <p id="checklist-count" class="text-[11px] text-sumiLight font-mono">0 / 0 項</p>
+          </div>
+        </div>
+        <!-- 視覺化進度條 -->
+        <div class="w-full h-2.5 bg-washiDark rounded-full overflow-hidden border border-kinpaku/20">
+          <div id="checklist-progress-bar" class="h-full bg-midori transition-all duration-300 rounded-full" style="width: 0%"></div>
+        </div>
 
-          <!-- 第2次培訓 -->
-          <div class="p-3.5 rounded-xl bg-washi border border-kinpaku/30">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="font-bold text-sm text-kutani">第 2 次行前培訓</span>
-              <span class="text-xs font-bold px-2 py-0.5 rounded bg-kutaniLight text-kutani">出國前約 7 日（約4小時）</span>
-            </div>
-            <p class="text-xs text-sumi leading-relaxed">
-              工房實作禮儀、服裝及護具準備（如<strong class="text-shu">漆液過敏防護</strong>、<strong class="text-shu">部分區域攝影限制</strong>）、個人紀錄片拍攝企畫討論與最終行前確認。
-            </p>
+        <!-- 分類篩選按鈕 -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-3 mt-3 border-t border-washiDark">
+          <button onclick="setChecklistFilter('all')" data-chkcat="all"
+            class="chk-cat-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold bg-kutani text-white">
+            全部項目
+          </button>
+          <button onclick="setChecklistFilter('docs')" data-chkcat="docs"
+            class="chk-cat-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-medium bg-washi text-sumi border border-kinpaku/30">
+            證件與行政
+          </button>
+          <button onclick="setChecklistFilter('workshop')" data-chkcat="workshop"
+            class="chk-cat-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-medium bg-washi text-sumi border border-kinpaku/30">
+            工房護具與服裝
+          </button>
+          <button onclick="setChecklistFilter('tech')" data-chkcat="tech"
+            class="chk-cat-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-medium bg-washi text-sumi border border-kinpaku/30">
+            攝影紀錄與3C
+          </button>
+          <button onclick="setChecklistFilter('life')" data-chkcat="life"
+            class="chk-cat-pill shrink-0 px-2.5 py-1 rounded-lg text-xs font-medium bg-washi text-sumi border border-kinpaku/30">
+            衣物與生活用品
+          </button>
+        </div>
+      </div>
+
+      <!-- 自訂新增待辦表單 -->
+      <div class="bg-kinpakuLight/70 rounded-2xl p-3.5 border border-kinpaku/40">
+        <div class="text-xs font-bold text-kinpakuDark mb-2 flex items-center gap-1.5">
+          <span>＋ 新增個人自訂準備項目</span>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2">
+          <select id="new-chk-category" class="px-2.5 py-2 text-xs bg-white rounded-xl border border-kinpaku/40 text-sumi font-medium focus:outline-none">
+            <option value="docs">證件與行政</option>
+            <option value="workshop">工房護具與服裝</option>
+            <option value="tech">攝影紀錄與3C</option>
+            <option value="life" selected>衣物與生活用品</option>
+          </select>
+          <div class="flex-1 flex gap-2">
+            <input type="text" id="new-chk-text" onkeydown="if(event.key==='Enter') addCustomChecklistItem()"
+              placeholder="輸入要攜帶或待辦事項（如：伴手禮、個人習慣藥物）"
+              class="flex-1 px-3 py-2 text-xs bg-white rounded-xl border border-kinpaku/40 text-sumi focus:outline-none focus:ring-2 focus:ring-kutani/30" />
+            <button onclick="addCustomChecklistItem()" class="shrink-0 px-4 py-2 rounded-xl bg-kutani text-white text-xs font-bold shadow-2xs hover:bg-kutani/90">
+              新增
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- 3. 經費結構一覽 -->
-      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
+      <!-- 清單分類區塊容器 -->
+      <div id="checklist-container" class="space-y-4">
+        <!-- 由 JS 動態渲染 -->
+      </div>
+
+      <!-- 重設預設清單按鈕 -->
+      <div class="text-center pt-2">
+        <button onclick="resetChecklistConfirm()" class="text-[11px] text-sumiLight hover:text-shu underline">
+          重設所有勾選狀態（保留自訂項目）
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 分頁四：【收支記帳】（日圓/台幣雙幣記帳）       -->
+    <!-- ========================================== -->
+    <section id="view-expenses" class="hidden flex-1 p-4 space-y-4">
+      
+      <!-- 1. 青年自理預算總覽與匯率設定卡片 -->
+      <div class="bg-kutani text-washi rounded-2xl p-4 shadow-washi relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-28 h-28 rounded-full gold-foil-gradient opacity-15 pointer-events-none"></div>
+        
+        <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-white/15">
+          <div>
+            <span class="text-[11px] text-kinpaku font-bold tracking-wider">青年自理預算與海外記帳</span>
+            <h2 class="font-serif text-lg font-bold text-white">雙幣收支儀表板</h2>
+          </div>
+          <!-- 即時匯率設定 -->
+          <div class="flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/20">
+            <label for="exchange-rate-input" class="text-[11px] text-white/80 whitespace-nowrap">1 JPY =</label>
+            <input type="number" id="exchange-rate-input" step="0.001" min="0.01" max="10"
+              onchange="updateExchangeRate(this.value)"
+              class="w-14 px-1.5 py-0.5 text-xs font-mono font-bold text-sumi bg-white rounded text-center focus:outline-none" />
+            <span class="text-[11px] text-kinpaku font-bold">TWD</span>
+          </div>
+        </div>
+
+        <!-- 總支出與剩餘預算看板 -->
+        <div class="grid grid-cols-2 gap-3 mb-3">
+          <div class="bg-white/10 rounded-xl p-3 border border-white/15">
+            <div class="text-[11px] text-white/75">累計總支出（折合台幣）</div>
+            <div id="exp-total-twd" class="font-serif text-xl font-black text-white mt-0.5">NT$ 0</div>
+            <div id="exp-total-jpy" class="text-[11px] font-mono text-kinpaku mt-0.5">≈ ¥ 0 JPY</div>
+          </div>
+
+          <div class="bg-white/10 rounded-xl p-3 border border-white/15">
+            <div class="text-[11px] text-white/75 flex items-center justify-between">
+              <span>零用金剩餘額度</span>
+              <span class="text-[10px] text-kinpaku">上限 5,217</span>
+            </div>
+            <div id="exp-pocket-remain" class="font-serif text-xl font-black text-kinpaku mt-0.5">NT$ 5,217</div>
+            <div id="exp-self-remain" class="text-[11px] font-mono text-white/80 mt-0.5">自理總餘：NT$ 27,017</div>
+          </div>
+        </div>
+
+        <!-- 簡章經費參考摺疊明細 -->
+        <details class="group bg-white/10 rounded-xl border border-white/15 text-xs">
+          <summary class="px-3 py-2 cursor-pointer font-medium text-white/90 flex items-center justify-between select-none">
+            <span>📋 查看簡章經費規劃參考（總獎勵金 NT$ 250,000）</span>
+            <span class="text-kinpaku text-[11px] group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="px-3 pb-3 pt-1 border-t border-white/10 space-y-2 text-[11px] text-white/85 leading-relaxed">
+            <div class="grid grid-cols-3 gap-1.5 text-center pt-1">
+              <div class="bg-black/20 p-2 rounded-lg">
+                <div class="text-white/65">來回機票</div>
+                <div class="font-mono font-bold text-kinpaku">NT$ 20,000</div>
+              </div>
+              <div class="bg-black/20 p-2 rounded-lg">
+                <div class="text-white/65">青年零用金</div>
+                <div class="font-mono font-bold text-kinpaku">NT$ 5,217</div>
+              </div>
+              <div class="bg-black/20 p-2 rounded-lg">
+                <div class="text-white/65">海外保險費</div>
+                <div class="font-mono font-bold text-kinpaku">NT$ 1,800</div>
+              </div>
+            </div>
+            <p>• <strong>青年自理合計 NT$ 27,017</strong>；其餘 <strong>NT$ 222,983</strong> 由合作單位支應（含見習期間餐費、住宿費、跨城市交通、機構研習報名與口譯費）。</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- 2. 新增收支紀錄表單 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/35 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-serif font-bold text-sm text-kutani flex items-center gap-1.5">
+            <span class="w-1.5 h-3.5 rounded-full bg-shu"></span>
+            新增一筆收支紀錄
+          </h3>
+          <!-- 收/支切換 -->
+          <div class="inline-flex rounded-lg bg-washiDark p-0.5 border border-kinpaku/30">
+            <button type="button" id="type-btn-expense" onclick="setExpenseType('expense')"
+              class="px-2.5 py-1 rounded-md text-xs font-bold bg-shu text-white shadow-2xs transition-all">
+              支出
+            </button>
+            <button type="button" id="type-btn-income" onclick="setExpenseType('income')"
+              class="px-2.5 py-1 rounded-md text-xs font-medium text-sumiLight transition-all">
+              收入/補助
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <!-- 日期/天數選擇 -->
+          <div>
+            <label class="block text-[11px] font-bold text-sumiLight mb-1">日期 / 行程日</label>
+            <select id="exp-day" class="w-full px-2.5 py-2 text-xs bg-washi rounded-xl border border-kinpaku/40 text-sumi font-medium focus:outline-none">
+              <option value="行前準備">行前準備（機票/保險/裝備）</option>
+              <!-- D1~D17 由 JS 動態填入 -->
+            </select>
+          </div>
+
+          <!-- 分類選擇 -->
+          <div>
+            <label class="block text-[11px] font-bold text-sumiLight mb-1">消費分類</label>
+            <select id="exp-category" class="w-full px-2.5 py-2 text-xs bg-washi rounded-xl border border-kinpaku/40 text-sumi font-medium focus:outline-none">
+              <option value="餐飲美食">🍜 餐飲美食</option>
+              <option value="交通移動">🚃 交通移動</option>
+              <option value="工藝體驗/材料">🏺 工藝體驗/材料</option>
+              <option value="伴手禮/紀念品">🎁 伴手禮/紀念品</option>
+              <option value="機票/保險/行政">✈️ 機票/保險/行政</option>
+              <option value="其他">📝 其他</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 金額與幣別輸入 -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <div>
+            <label class="block text-[11px] font-bold text-sumiLight mb-1">幣別</label>
+            <select id="exp-currency" oninput="updateLiveConversionPreview()" class="w-full px-2.5 py-2 text-xs bg-washi rounded-xl border border-kinpaku/40 text-sumi font-bold focus:outline-none">
+              <option value="JPY">🇯🇵 日圓 (JPY)</option>
+              <option value="TWD">🇹🇼 台幣 (TWD)</option>
+            </select>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-[11px] font-bold text-sumiLight mb-1 flex justify-between">
+              <span>金額</span>
+              <span id="live-convert-hint" class="text-kinpakuDark font-mono">≈ NT$ 0</span>
+            </label>
+            <input type="number" id="exp-amount" min="0" step="any" oninput="updateLiveConversionPreview()"
+              placeholder="輸入金額（例如：1200）"
+              class="w-full px-3 py-2 text-sm font-mono font-bold bg-washi rounded-xl border border-kinpaku/40 text-sumi focus:outline-none focus:ring-2 focus:ring-kutani/30" />
+          </div>
+        </div>
+
+        <!-- 項目備註與送出按鈕 -->
+        <div class="flex gap-2">
+          <input type="text" id="exp-note" onkeydown="if(event.key==='Enter') addExpenseRecord()"
+            placeholder="項目說明（如：東茶屋街金箔霜淇淋、ICOCA儲值）"
+            class="flex-1 px-3 py-2 text-xs bg-washi rounded-xl border border-kinpaku/40 text-sumi focus:outline-none focus:ring-2 focus:ring-kutani/30" />
+          <button onclick="addExpenseRecord()"
+            class="shrink-0 px-4 py-2 rounded-xl bg-kutani text-white text-xs font-bold shadow-sm hover:bg-kutani/90 transition-colors">
+            記一筆
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. 帳務明細列表 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/35">
         <div class="flex items-center justify-between mb-3 pb-2 border-b border-washiDark">
-          <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
-            <span class="w-1.5 h-4 bg-kinpaku rounded-full"></span>
-            經費規劃與獎勵金結構
-          </h2>
-          <span class="font-serif font-bold text-sm text-kinpakuDark">總計 250,000 元</span>
+          <h3 class="font-serif font-bold text-sm text-kutani">收支明細紀錄</h3>
+          <span id="exp-record-count" class="text-xs text-sumiLight font-mono">共 0 筆</span>
         </div>
 
-        <!-- 總額卡片 -->
-        <div class="grid grid-cols-2 gap-2.5 mb-4">
-          <div class="p-3 rounded-xl bg-kutani text-white">
-            <div class="text-[11px] text-white/75">合作單位辦理項目</div>
-            <div class="font-serif text-lg font-bold text-kinpaku mt-0.5">222,983 元</div>
-          </div>
-          <div class="p-3 rounded-xl bg-kinpakuLight border border-kinpaku/40 text-sumi">
-            <div class="text-[11px] text-sumiLight">青年自理項目</div>
-            <div class="font-serif text-lg font-bold text-kutani mt-0.5">27,017 元</div>
-          </div>
+        <div id="expense-list" class="divide-y divide-washiDark">
+          <!-- 由 JS 動態渲染 -->
         </div>
-
-        <!-- 青年自理明細 -->
-        <div class="mb-4">
-          <h3 class="text-xs font-bold text-kutani mb-2 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-shu"></span>
-            青年自理項目明細（共 27,017 元）
-          </h3>
-          <div class="bg-washi rounded-xl border border-kinpaku/25 divide-y divide-kinpaku/20 text-xs">
-            <div class="p-2.5 flex justify-between items-start gap-2">
-              <div>
-                <span class="font-bold text-sumi">機票</span>
-                <p class="text-[11px] text-sumiLight mt-0.5">臺灣至計畫執行地之來回經濟艙機票</p>
-              </div>
-              <span class="font-mono font-bold text-kutani shrink-0">20,000 元</span>
-            </div>
-            <div class="p-2.5 flex justify-between items-start gap-2">
-              <div>
-                <span class="font-bold text-sumi">零用金</span>
-                <p class="text-[11px] text-sumiLight mt-0.5">青年個人海外零用金</p>
-              </div>
-              <span class="font-mono font-bold text-kutani shrink-0">5,217 元</span>
-            </div>
-            <div class="p-2.5 flex justify-between items-start gap-2">
-              <div>
-                <span class="font-bold text-sumi">保險費</span>
-                <p class="text-[11px] text-sumiLight mt-0.5">投保至少 200 至 300 萬元意外險及 20 至 50 萬元海外醫療險</p>
-              </div>
-              <span class="font-mono font-bold text-kutani shrink-0">1,800 元</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 合作單位支用範圍 -->
-        <div>
-          <h3 class="text-xs font-bold text-kutani mb-2 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-kutani"></span>
-            合作單位辦理支用內容（共 222,983 元）
-          </h3>
-          <div class="bg-washi rounded-xl p-3 border border-kinpaku/25 text-xs text-sumi space-y-1.5 leading-relaxed">
-            <p>• <strong>生活費與交通：</strong>包含見習期間餐費、住宿費、當地交通費及跨城市移動大眾運輸/租車費用。</p>
-            <p>• <strong>機構參訪與研習費：</strong>能美市九谷燒美術館導覽、石川縣九谷燒技術中心研修、CERABO KUTANI 等機構報名與研習費用。</p>
-            <p>• <strong>專業支援與行政：</strong>行前培訓講師費、專業課程與參訪口譯翻譯費、設備與場地使用費、印刷雜支、行政管理費及隨團業師輔導相關費用。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. 其他重要注意事項 -->
-      <div class="bg-white rounded-2xl p-4 shadow-washi border border-shu/30">
-        <h2 class="font-serif font-bold text-base text-shu flex items-center gap-2 mb-3">
-          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-            <line x1="12" y1="9" x2="12" y2="13"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          重要規範與注意事項
-        </h2>
-        <ul class="space-y-2.5 text-xs text-sumi leading-relaxed">
-          <li class="flex items-start gap-2">
-            <span class="text-shu font-bold">1.</span>
-            <span><strong>簽證辦理期限：</strong>請依計畫內容辦理所需簽證，並於「圓夢期間」規定出發日期前取得；逾期未取得者視同放棄錄取資格，不得提出異議。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-shu font-bold">2.</span>
-            <span><strong>全程參與義務：</strong>錄取者須全程參與計畫行程（含行前培訓、說明會、集訓及成果發表會），並配合合作單位相關行政作業。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-shu font-bold">3.</span>
-            <span><strong>請假與獎勵金追回規範：</strong>出國圓夢期間不得因個人因素請假或無故缺席，若無法全程參與則視同未完成本計畫，須繳回未執行日數或全部之獎勵金金額。</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-shu font-bold">4.</span>
-            <span><strong>紀律與法令遵守：</strong>若未能依據計畫學習、未能遵守團體規範或違反本國、當地國相關法令者，將提早終止計畫執行或酌情追回部分、全部獎勵金。</span>
-          </li>
-        </ul>
       </div>
 
     </section>
 
     <!-- 頁尾宣告 -->
-    <footer class="mt-auto px-5 py-6 text-center border-t border-kinpaku/25 bg-washiDark/50">
-      <p class="text-xs text-sumiLight font-medium">
+    <footer class="mt-auto px-5 py-5 text-center border-t border-kinpaku/25 bg-washiDark/50">
+      <p class="text-[11px] text-sumiLight font-medium">
         以上內容教育部青年發展署及合作單位保有調整及最終解釋之權利
       </p>
-      <p class="text-[11px] text-sumiLight/70 mt-1">
-        M-2-8 金澤職人夢｜行動版行程與見習手冊
+      <p class="text-[10px] text-sumiLight/70 mt-0.5">
+        M-2-8 金澤職人夢｜17日海外見習行動手冊（資料自動儲存於本機瀏覽器）
       </p>
     </footer>
 
   </div>
 
-  <!-- 機構快速簡介彈窗 (Modal，供行程卡片點擊機構標籤時即時查看) -->
-  <div id="inst-modal" class="hidden fixed inset-0 z-50 bg-sumi/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="closeInstModal(event)">
-    <div class="bg-washi w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl border-t-4 border-kinpaku animate-slide-up" onclick="event.stopPropagation()">
+  <!-- ========================================== -->
+  <!-- 底部固定 4 分頁導覽列 (Mobile Bottom Nav)    -->
+  <!-- ========================================== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
+    <div class="w-full max-w-2xl bg-white/95 backdrop-blur-md border-t border-kinpaku/40 shadow-nav pointer-events-auto grid grid-cols-4">
+      
+      <button onclick="switchTab('itinerary')" id="nav-btn-itinerary"
+        class="py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 text-shu font-bold transition-colors relative">
+        <span class="nav-indicator absolute top-0 left-1/4 right-1/4 h-0.5 bg-shu rounded-full"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span class="text-[11px]">每日行程</span>
+      </button>
+
+      <button onclick="switchTab('spots')" id="nav-btn-spots"
+        class="py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 text-sumiLight font-medium hover:text-kutani transition-colors relative">
+        <span class="nav-indicator hidden absolute top-0 left-1/4 right-1/4 h-0.5 bg-shu rounded-full"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span class="text-[11px]">見習景點</span>
+      </button>
+
+      <button onclick="switchTab('checklist')" id="nav-btn-checklist"
+        class="py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 text-sumiLight font-medium hover:text-kutani transition-colors relative">
+        <span class="nav-indicator hidden absolute top-0 left-1/4 right-1/4 h-0.5 bg-shu rounded-full"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="9 11 12 14 22 4"></polyline>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        <span class="text-[11px]">行前清單</span>
+      </button>
+
+      <button onclick="switchTab('expenses')" id="nav-btn-expenses"
+        class="py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 text-sumiLight font-medium hover:text-kutani transition-colors relative">
+        <span class="nav-indicator hidden absolute top-0 left-1/4 right-1/4 h-0.5 bg-shu rounded-full"></span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="12" y1="1" x2="12" y2="23"></line>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        <span class="text-[11px]">收支記帳</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- 彈窗 1：景點快速簡介與 Google Maps 導航       -->
+  <!-- ========================================== -->
+  <div id="spot-modal" class="hidden fixed inset-0 z-50 bg-sumi/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="closeSpotModal(event)">
+    <div class="bg-washi w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl border-t-4 border-kinpaku" onclick="event.stopPropagation()">
       <div class="flex items-start justify-between gap-3 mb-3">
         <div>
           <span id="modal-craft-tag" class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-kutaniLight text-kutani mb-1.5">工藝類別</span>
-          <h3 id="modal-title" class="font-serif text-xl font-bold text-sumi">機構名稱</h3>
+          <h3 id="modal-title" class="font-serif text-xl font-bold text-sumi">景點名稱</h3>
           <p id="modal-jp-name" class="text-xs text-sumiLight mt-0.5">日文名稱</p>
         </div>
-        <button onclick="closeInstModal()" class="p-2 rounded-full bg-washiDark text-sumiLight hover:text-shu">
+        <button onclick="closeSpotModal()" class="p-2 rounded-full bg-washiDark text-sumiLight hover:text-shu">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -509,119 +658,308 @@
       </div>
 
       <p id="modal-desc" class="text-sm text-sumi leading-relaxed bg-white p-3.5 rounded-xl border border-kinpaku/25 mb-4">
-        機構說明
+        景點說明
       </p>
 
       <div class="grid grid-cols-2 gap-2.5">
-        <button onclick="goToInstitutionsTab()" class="py-2.5 px-3 rounded-xl bg-washiDark text-kutani font-bold text-xs border border-kutani/20 hover:bg-kutaniLight transition-colors">
-          查看全部 7 大機構
-        </button>
-        <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer"
+        <a id="modal-gmap-link" href="#" target="_blank" rel="noopener noreferrer"
+          class="py-2.5 px-3 rounded-xl bg-midori text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm hover:bg-midori/90 transition-colors">
+          <span>📍 開啟 Google Maps</span>
+        </a>
+        <a id="modal-web-link" href="#" target="_blank" rel="noopener noreferrer"
           class="py-2.5 px-3 rounded-xl bg-kutani text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm hover:bg-kutani/90 transition-colors">
-          <span>開啟官方參考連結</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
+          <span>官方參考連結 ↗</span>
         </a>
       </div>
     </div>
   </div>
 
+  <!-- ========================================== -->
+  <!-- 彈窗 2：簡章行前培訓與重要須知                -->
+  <!-- ========================================== -->
+  <div id="info-modal" class="hidden fixed inset-0 z-50 bg-sumi/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="closeInfoModal(event)">
+    <div class="bg-washi w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl border-t-4 border-shu" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-kinpaku/30">
+        <h3 class="font-serif text-lg font-bold text-kutani">M-2-8 簡章規範與行前須知</h3>
+        <button onclick="closeInfoModal()" class="p-1.5 rounded-full bg-washiDark text-sumiLight hover:text-shu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs text-sumi leading-relaxed">
+        <div class="p-3 rounded-xl bg-shuLight border border-shu/25 text-shu font-medium">
+          ⚠️ <strong>行前培訓（共 2 次・合計約 8 小時）：</strong>若無法參加視同放棄錄取資格。採實體（臺北市仁美國際會議室 / TAI-ONE SPACE）與線上同步進行。
+        </div>
+        <div class="p-3 rounded-xl bg-white border border-kinpaku/30 space-y-1.5">
+          <p>• <strong>第 1 次培訓（出國前約 14 日）：</strong>海外研修安全與健康管理、當地生活與交通說明、詳細行程與分組確認、行前教材導讀。</p>
+          <p>• <strong>第 2 次培訓（出國前約 7 日）：</strong>工房實作禮儀、服裝及護具準備（<strong>漆液過敏防護、部分區域攝影限制</strong>）、個人紀錄片拍攝企畫討論。</p>
+        </div>
+        <div class="p-3 rounded-xl bg-white border border-kinpaku/30 space-y-1.5">
+          <div class="font-bold text-kutani">其他重要規定：</div>
+          <p>1. 須於出發日前取得所需簽證，逾期視同放棄錄取資格。</p>
+          <p>2. 須投保至少 200–300 萬元意外險及 20–50 萬元海外醫療險。</p>
+          <p>3. 圓夢期間不得因個人因素請假或無故缺席，否則須繳回未執行日數或全部獎勵金。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 輕量提示吐司 (Toast Message，取代 alert) -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-sumi text-white text-xs font-medium shadow-lg flex items-center gap-2">
+  <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2 rounded-full bg-sumi text-white text-xs font-medium shadow-lg flex items-center gap-2">
     <span class="w-2 h-2 rounded-full bg-kinpaku"></span>
-    <span id="toast-msg">已儲存筆記</span>
+    <span id="toast-msg">已儲存</span>
   </div>
 
   <script>
     // ==========================================
-    // 1. 完整資料庫：7 大重點見習機構
+    // 1. 完整資料庫：18 處見習機構與重要參訪景點 (含 Google Maps 連結)
     // ==========================================
-    const institutionsData = [
+    function buildGmapUrl(query) {
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    }
+
+    const spotsData = [
       {
-        id: 'hakuichi',
-        name: '株式會社箔一',
-        jpName: '株式会社箔一',
-        location: '石川縣金澤市',
-        craft: '金澤金箔',
-        dayRef: 'D11',
-        dayNum: 11,
-        description: '為金澤金箔代表企業，預定辦理金箔製作工序、工廠研修、品質管理、商品化應用及品牌經營等研習內容。',
-        url: 'https://www.hakuichi.co.jp/'
+        id: 'nomi-gosai',
+        name: '能美市九谷燒美術館・五彩館＆淺藏五十吉紀念館',
+        jpName: '能美市九谷焼美術館｜五彩館｜・浅蔵五十吉記念館',
+        city: '能美市',
+        address: '石川縣能美市泉台町南56',
+        craft: '九谷五彩・巨匠美學',
+        dayNum: 2,
+        isCoreOrg: false,
+        description: '深入檢證九谷燒百年色彩體系與巨匠淺藏五十吉名品之美學，理解傳統五彩與現代陶藝的演進脈絡。',
+        mapQuery: '能美市九谷焼美術館 五彩館',
+        url: 'https://kutani-mus.jp/'
+      },
+      {
+        id: 'kutani-tech-center',
+        name: '石川縣九谷燒技術中心（含技術研修所）',
+        jpName: '石川県九谷焼技術センター・九谷焼技術研修所',
+        city: '能美市',
+        address: '石川縣能美市泉台町南22',
+        craft: '公設育成・無鉛和繪具',
+        dayNum: 2,
+        isCoreOrg: false,
+        description: '參觀無鉛和繪具之最新科學研究成果，並實地了解支援年輕九谷燒作家獨立創業的公設技術育成體系。',
+        mapQuery: '石川県九谷焼技術センター',
+        url: 'https://www.pref.ishikawa.lg.jp/kutani/'
+      },
+      {
+        id: 'cerabo-kutani',
+        name: 'CERABO KUTANI（九谷陶瓷實驗室）',
+        jpName: '九谷セラミック・ラボラトリー (CERABO KUTANI)',
+        city: '小松市',
+        address: '石川縣小松市若杉町ア91',
+        craft: '花坂陶石・瓷土製造',
+        dayNum: 3,
+        isCoreOrg: false,
+        description: '由隈研吾設計的複合型九谷燒體驗設施，在課堂學習珍貴花坂陶石製成瓷土的基礎工序，並進行手捏陶體驗研修。',
+        mapQuery: 'CERABO KUTANI 九谷セラミック・ラボラトリー',
+        url: 'https://cerabo-kutani.com/'
+      },
+      {
+        id: 'miyayoshi',
+        name: '宮吉製陶',
+        jpName: '株式会社宮吉製陶',
+        city: '小松市',
+        address: '石川縣小松市若杉町',
+        craft: '九谷燒現代窯元',
+        dayNum: 3,
+        isCoreOrg: true,
+        description: '九谷燒代表性現代窯元，預定辦理窯元營運模式、現代化製程管理導覽與第一線製作實務研修。',
+        mapQuery: '株式会社宮吉製陶 石川県小松市',
+        url: 'https://miyayoshiseitou.jp/'
+      },
+      {
+        id: 'ishikawa-kutani-museum',
+        name: '石川縣立九谷燒美術館',
+        jpName: '石川県立九谷焼美術館',
+        city: '加賀市',
+        address: '石川縣加賀市大聖寺地方町1-10-13',
+        craft: '古九谷・歷史起源',
+        dayNum: 4,
+        isCoreOrg: false,
+        description: '日本唯一專門展示九谷燒歷史與名作的縣立美術館，透過專業導覽串聯古九谷、再興九谷至現代作家的歷史脈絡。',
+        mapQuery: '石川県立九谷焼美術館',
+        url: 'https://www.kutani-mus.jp/'
       },
       {
         id: 'fukushima',
         name: '福島武山工房',
         jpName: '福島武山工房',
-        location: '石川縣能美市',
+        city: '能美市',
+        address: '石川縣能美市佐野町',
         craft: '九谷燒赤繪細描',
-        dayRef: 'D4',
         dayNum: 4,
-        description: '為九谷燒赤繪細描代表工房之一，預定辦理赤繪細描技法觀摩、專業導覽及工房交流。',
+        isCoreOrg: true,
+        description: '九谷燒「赤繪細描」代表工房之一，以極致纖細的紅彩筆觸聞名，預定辦理赤繪細描技法觀摩、專業導覽及工房交流。',
+        mapQuery: '福島武山工房 石川県能美市',
         url: 'https://www.instagram.com/fukushima_buzan_kutani/'
       },
       {
         id: 'tougeikou',
         name: '陶藝晄',
         jpName: '陶芸晄',
-        location: '石川縣能美市',
-        craft: '九谷燒',
-        dayRef: 'D4',
+        city: '能美市',
+        address: '石川縣能美市',
+        craft: '九谷燒作家工房',
         dayNum: 4,
-        description: '為九谷燒相關作家工房，預定辦理九谷燒技法示範、作家交流與工房研修。',
+        isCoreOrg: true,
+        description: '九谷燒當代作家工房，深入工坊現場進行九谷燒彩繪與成型技法示範、作家面對面交流與實務研修。',
+        mapQuery: '陶芸晄 石川県能美市',
         url: 'https://kutani-midori.jimdofree.com/'
       },
       {
-        id: 'miyayoshi',
-        name: '宮吉製陶',
-        jpName: '株式会社宮吉製陶',
-        location: '石川縣小松市',
-        craft: '九谷燒窯元',
-        dayRef: 'D3',
-        dayNum: 3,
-        description: '為九谷燒窯元，預定辦理窯元營運、製程導覽與實務研修。',
-        url: 'https://miyayoshiseitou.jp/'
+        id: 'kutani-kiln-ruins',
+        name: '九谷燒窯跡展示館（現存最古老九谷燒登窯）',
+        jpName: '九谷焼窯跡展示館',
+        city: '加賀市',
+        address: '石川縣加賀市山代温泉19-101-9',
+        craft: '再興九谷・吉田屋窯跡',
+        dayNum: 5,
+        isCoreOrg: false,
+        description: '保存江戶時代後期「再興九谷」吉田屋窯跡與現存最古老的九谷燒連房式登窯，實地考察傳統磁器窯爐構造。',
+        mapQuery: '九谷焼窯跡展示館 石川県加賀市',
+        url: 'https://www.city.kaga.ishikawa.jp/'
       },
       {
-        id: 'soukeikai',
-        name: '宗桂會館',
-        jpName: '公益財団法人宗桂会',
-        location: '石川縣金澤市',
-        craft: '加賀象嵌',
-        dayRef: 'D13',
-        dayNum: 13,
-        description: '為加賀象嵌專門美術館與相關推廣據點，預定辦理專業導覽、技法說明與加賀象嵌交流。',
-        url: 'https://www.soukeikai.or.jp/'
+        id: 'kinzangama',
+        name: '錦山窯「嘸旦 -MUTAN-」',
+        jpName: '株式会社錦山窯・嘸旦 -MUTAN-',
+        city: '小松市',
+        address: '石川縣小松市高堂町ト18',
+        craft: '九谷燒金彩・空間美學',
+        dayNum: 5,
+        isCoreOrg: true,
+        description: '傳承 110 餘年「金彩」技藝的名門窯元，於頂級展示空間「嘸旦-MUTAN-」學習極限金彩意匠與現代藝術品牌行銷。',
+        mapQuery: '株式会社錦山窯 石川県小松市',
+        url: 'https://kinzangama.com/'
       },
       {
         id: 'yamanaka',
         name: '石川縣立山中漆器產業技術中心',
         jpName: '石川県立山中漆器産業技術センター',
-        location: '石川縣加賀市',
-        craft: '山中漆器',
-        dayRef: 'D6',
+        city: '加賀市',
+        address: '石川縣加賀市山中温泉塚谷町イ270',
+        craft: '山中漆器・轆轤車削・蒔繪',
         dayNum: 6,
-        description: '為日本重要之山中漆器研修設施，預定辦理轆轤車削、蒔繪及相關漆藝研修。',
+        isCoreOrg: true,
+        description: '日本重要山中漆器職人育成機構，系統化調查「轆轤車削（ろくろ挽き）」與「蒔繪」指導體系並接受實作驗證。',
+        mapQuery: '石川県立山中漆器産業技術センター',
         url: 'https://yamanaka696.org/'
       },
       {
-        id: 'kinzangama',
-        name: '錦山窯',
-        jpName: '株式会社錦山窯',
-        location: '石川縣小松市',
-        craft: '九谷燒金彩・嘸旦-MUTAN-',
-        dayRef: 'D5',
-        dayNum: 5,
-        description: '為九谷燒重要窯元，並設有展示空間「嘸旦-MUTAN-」，預定辦理展示空間導覽、品牌經營觀察與金彩技法相關交流。',
-        url: 'https://kinzangama.com/'
+        id: 'ishikawa-crafts-museum',
+        name: '石川縣立傳統工藝產業館',
+        jpName: 'いしかわ生活工芸ミュージアム（石川県立伝統産業工芸館）',
+        city: '金澤市',
+        address: '石川縣金澤市兼六町1-1（兼六園旁）',
+        craft: '石川傳統工藝 36 業種',
+        dayNum: 9,
+        isCoreOrg: false,
+        description: '完整匯集石川縣 36 種傳統工藝品（加賀友禪、金澤箔、九谷燒、輪島塗等），透過特別講座掌握工藝色彩與基礎知識。',
+        mapQuery: 'いしかわ生活工芸ミュージアム',
+        url: 'https://www.ishikawa-densankan.jp/'
+      },
+      {
+        id: 'craft-hirosaka',
+        name: '金澤・Craft 廣坂',
+        jpName: '金沢・クラフト広坂',
+        city: '金澤市',
+        address: '石川縣金澤市広坂1-2-25',
+        craft: '希少傳統工藝・現代流通',
+        dayNum: 9,
+        isCoreOrg: false,
+        description: '位於金澤市中心的工藝選品與推廣據點，專業導覽金澤稀少傳統工藝如何轉化為現代生活美學與市場流通模式。',
+        mapQuery: '金沢・クラフト広坂',
+        url: 'https://www.kanazawa-kankoukyoukai.or.jp/'
+      },
+      {
+        id: 'kanazawa-bidai',
+        name: '金澤美術工藝大學（工藝科）',
+        jpName: '金沢美術工芸大学',
+        city: '金澤市',
+        address: '石川縣金澤市小立野2-40-1',
+        craft: '高等教育・技術語言化',
+        dayNum: 10,
+        isCoreOrg: false,
+        description: '日本知名公立藝術大學，進行工藝科技術交流，驗證高等教育如何將職人暗默知轉化為系統化的技術語言。',
+        mapQuery: '金沢美術工芸大学',
+        url: 'https://www.kanazawa-bidai.ac.jp/'
+      },
+      {
+        id: 'utatsuyama-craft',
+        name: '金澤卯辰山工藝工房',
+        jpName: '金沢卯辰山工芸工房',
+        city: '金澤市',
+        address: '石川縣金澤市卯辰町ト10',
+        craft: '公設工藝孵化器',
+        dayNum: 10,
+        isCoreOrg: false,
+        description: '支援年輕工藝作家獨立創作的公設育成設施，聚焦材料應用、品牌轉譯及地方創生模式研究。',
+        mapQuery: '金沢卯辰山工芸工房',
+        url: 'https://www.utatsu-kogei.gr.jp/'
+      },
+      {
+        id: 'higashi-chaya',
+        name: '東山・東茶屋街區域',
+        jpName: 'ひがし茶屋街',
+        city: '金澤市',
+        address: '石川縣金澤市東山1丁目',
+        craft: '工藝×觀光・老街活化',
+        dayNum: 11,
+        isCoreOrg: false,
+        description: '（6/30 行程對調）國家重要傳統建造物群保存地區，實地考察傳統工藝如何與茶屋文化結合，設計為高魅力觀光經濟內容。',
+        mapQuery: 'ひがし茶屋街 金沢市',
+        url: 'https://www.kanazawa-kankoukyoukai.or.jp/'
+      },
+      {
+        id: 'yasue-gold-leaf',
+        name: '金澤市立安江金箔工藝館',
+        jpName: '金沢市立安江金箔工芸館',
+        city: '金澤市',
+        address: '石川縣金澤市東山1-3-10',
+        craft: '金箔工藝史・製箔工具',
+        dayNum: 11,
+        isCoreOrg: false,
+        description: '（6/30 行程對調）日本唯一金箔專門市立美術館，完整典藏緣付金箔傳統製程工具、金箔美術品與工藝歷史脈絡。',
+        mapQuery: '金沢市立安江金箔工芸館',
+        url: 'https://www.kanazawa-museum.jp/kinpaku/'
+      },
+      {
+        id: 'hakuichi',
+        name: '株式會社箔一（總店・工廠研習）',
+        jpName: '株式会社箔一 本社・箔巧館',
+        city: '金澤市',
+        address: '石川縣金澤市森戸2-1-1',
+        craft: '金澤金箔・1萬分之1毫米',
+        dayNum: 12,
+        isCoreOrg: true,
+        description: '（7/01 行程對調・產線恢復開放）金澤金箔龍頭企業，學習 1 萬分之 1 毫米金箔製造工藝、現代化品質管理及商品化品牌經營。',
+        mapQuery: '箔一 本社 箔巧館 金沢市',
+        url: 'https://www.hakuichi.co.jp/'
+      },
+      {
+        id: 'soukeikai',
+        name: '宗桂會館（公益財團法人宗桂會）',
+        jpName: '公益財団法人宗桂会 宗桂会館',
+        city: '金澤市',
+        address: '石川縣金澤市彦三町1-8-14',
+        craft: '加賀象嵌・金屬鑲嵌',
+        dayNum: 13,
+        isCoreOrg: true,
+        description: '加賀象嵌專門美術館與推廣據點，深入了解金澤舉世聞名的金屬鑲嵌加飾技法「加賀象嵌」與職人社群傳承系統。',
+        mapQuery: '公益財団法人宗桂会 金沢市',
+        url: 'https://www.soukeikai.or.jp/'
       }
     ];
 
     // ==========================================
     // 2. 完整資料庫：17 日每日行程 (116/06/20 - 116/07/06)
-    // 註：民國116年為西元2027年，6/20 為週日，依序推算正確星期
     // ==========================================
     const itineraryData = [
       {
@@ -635,7 +973,7 @@
           '臺灣 → 小松機場 → 移動至加賀地區・飯店入住，為17日研修揭開序幕。'
         ],
         purpose: '',
-        institutions: []
+        spotIds: []
       },
       {
         day: 2,
@@ -649,7 +987,7 @@
           '石川縣九谷燒技術中心（含技術研修所）設施見學'
         ],
         purpose: '【九谷五彩之色彩表現與青年獨立支援基礎設施】徹底檢證巨匠名品之美學，以及無鉛和繪具之最新科學研究、支援年輕作家自立之公設育成體系。',
-        institutions: []
+        spotIds: ['nomi-gosai', 'kutani-tech-center']
       },
       {
         day: 3,
@@ -663,7 +1001,7 @@
           '宮吉製陶（株式会社宮吉製陶）專業工藝產業導覽與研究'
         ],
         purpose: '於現代窯元學習窯元營運、製程管理與製作實務。',
-        institutions: ['miyayoshi']
+        spotIds: ['cerabo-kutani', 'miyayoshi']
       },
       {
         day: 4,
@@ -677,7 +1015,7 @@
           '福島武山工房、陶藝晄（陶芸晄）之工房專業工藝指導與交流'
         ],
         purpose: '深入工坊，觀察並體驗赤繪細描等九谷燒代表技法，串聯歷史起源與現代作家實踐。',
-        institutions: ['fukushima', 'tougeikou']
+        spotIds: ['ishikawa-kutani-museum', 'fukushima', 'tougeikou']
       },
       {
         day: 5,
@@ -691,7 +1029,7 @@
           '錦山窯（株式会社錦山窯）展示空間「嘸旦-MUTAN-」專業導覽與交流'
         ],
         purpose: '【再興九谷之磁器窯構造與極限金彩意匠之品牌經營】上午參觀現存最古老之九谷燒登窯；下午於名門錦山窯「嘸旦」學習傳承 110 餘年之金彩技術，以及昇華為現代藝術・設計之頂級空間美學（工藝行銷）。',
-        institutions: ['kinzangama']
+        spotIds: ['kutani-kiln-ruins', 'kinzangama']
       },
       {
         day: 6,
@@ -704,7 +1042,7 @@
           '石川縣立山中漆器產業技術中心'
         ],
         purpose: '【轆轤車削與蒔繪技術之系統驗證】終日駐留公設之專業職人育成機構，徹底調查山中漆器引以為傲之「轆轤車削（ろくろ挽き）」與「蒔繪（蒔絵）」之指導體系與手冊化機制，並接受轆轤車削等之實作指導與驗證。',
-        institutions: ['yamanaka']
+        spotIds: ['yamanaka']
       },
       {
         day: 7,
@@ -718,7 +1056,7 @@
           '資料蒐集 / 報告整理'
         ],
         purpose: '',
-        institutions: []
+        spotIds: []
       },
       {
         day: 8,
@@ -732,7 +1070,7 @@
           '第一周學習內容整理，包含報告及影片初稿'
         ],
         purpose: '',
-        institutions: []
+        spotIds: []
       },
       {
         day: 9,
@@ -746,7 +1084,7 @@
           '專業導覽金澤・Craft 廣坂（クラフト広坂）'
         ],
         purpose: '【傳統工藝 36 業種之色彩體系與現代工藝市場調查】綜合學習石川・金澤多樣傳統工藝之基礎知識與現代市場流通。',
-        institutions: []
+        spotIds: ['ishikawa-crafts-museum', 'craft-hirosaka']
       },
       {
         day: 10,
@@ -760,34 +1098,35 @@
           '金澤卯辰山工藝工房專業導覽 / 工藝產業研究'
         ],
         purpose: '【高等教育中技術之語言化與公設孵化器】驗證高度工藝教育制度與支援年輕作家獨立之基礎設施。由館方導覽，聚焦工藝史脈絡、材料應用、品牌轉譯及地方創生模式，並作為成果報告比較分析素材。',
-        institutions: []
+        spotIds: ['kanazawa-bidai', 'utatsuyama-craft']
       },
       {
         day: 11,
         date: '116/06/30',
         weekday: '週三',
         stage: 'kanazawa',
-        locationTag: '金澤市',
-        theme: '金箔製造科技與品質管理',
+        locationTag: '金澤・東山',
+        adjustmentNote: '行程微調：原 7/01 行程提前，因箔一工廠 6/30 年度設備檢修',
+        theme: '傳統工藝×觀光之品牌昇華',
         activities: [
-          '專業導覽箔一總店、工廠研習',
-          '株式會社箔一'
+          '東山・東茶屋街區域（工藝×觀光）、安江金箔工藝館訪問'
         ],
-        purpose: '【金箔製造科技與品質管理】至金箔龍頭企業，學習 1 萬分之 1 毫米的金箔製造工藝流程，以及現代化的品質管理系統、商品化進程。',
-        institutions: ['hakuichi']
+        purpose: '【傳統工藝昇華為觀光經濟之品牌設計】以東茶屋街為模型，學習傳統工藝如何被設計為具魅力之商業・觀光內容。',
+        spotIds: ['higashi-chaya', 'yasue-gold-leaf']
       },
       {
         day: 12,
         date: '116/07/01',
         weekday: '週四',
         stage: 'kanazawa',
-        locationTag: '金澤・東山',
-        theme: '傳統工藝×觀光之品牌昇華',
+        locationTag: '金澤市',
+        adjustmentNote: '行程微調：原 6/30 行程順延，產線恢復正常開放',
+        theme: '金箔製造科技與品質管理',
         activities: [
-          '東山・東茶屋街區域（工藝×觀光）、安江金箔工藝館訪問'
+          '專業導覽箔一總店、工廠研習（株式會社箔一）'
         ],
-        purpose: '【傳統工藝昇華為觀光經濟之品牌設計】以東茶屋街為模型，學習傳統工藝如何被設計為具魅力之商業・觀光內容。',
-        institutions: []
+        purpose: '【金箔製造科技與品質管理】至金箔龍頭企業，學習 1 萬分之 1 毫米的金箔製造工藝流程，以及現代化的品質管理系統、商品化進程。',
+        spotIds: ['hakuichi']
       },
       {
         day: 13,
@@ -801,7 +1140,7 @@
           '加賀象嵌作家工坊交流'
         ],
         purpose: '【加賀象嵌之金屬鑲嵌技法與社群傳承】調查金澤舉世聞名之金屬加飾技術「加賀象嵌」之技法與職人間之傳承系統。',
-        institutions: ['soukeikai']
+        spotIds: ['soukeikai']
       },
       {
         day: 14,
@@ -814,7 +1153,7 @@
           '自由時間（個人資料整理與市內自主調查）'
         ],
         purpose: '為 D16 成果發表整理個人資料，或於金澤市內自主調查。',
-        institutions: []
+        spotIds: []
       },
       {
         day: 15,
@@ -827,7 +1166,7 @@
           '成果發表準備及業師面談'
         ],
         purpose: '彙整翌日發表會之簡報資料，學習內容整理，包含報告及影片初稿提出。',
-        institutions: []
+        spotIds: []
       },
       {
         day: 16,
@@ -841,7 +1180,7 @@
           '成果發表會'
         ],
         purpose: '【臺日青年職人之真實課題對話與資料總括・發表】以 15 日研修所累積之資料為基礎發表成果，並與在地青年職人進行討論。',
-        institutions: []
+        spotIds: []
       },
       {
         day: 17,
@@ -854,61 +1193,105 @@
           '金澤市內 → 移動至小松機場 → 返回臺灣'
         ],
         purpose: '',
-        institutions: []
+        spotIds: []
       }
     ];
 
     // ==========================================
-    // 3. 應用程式狀態管理 (State & LocalStorage)
+    // 3. 預設行前準備清單資料 (依簡章規範設計)
     // ==========================================
-    const STORAGE_KEY = 'kanazawa_m28_notes_v1';
+    const defaultChecklistData = [
+      { id: 'chk-1', category: 'docs', text: '有效護照（效期 6 個月以上）與日本入境 VJW 登錄', checked: false, isCustom: false },
+      { id: 'chk-2', category: 'docs', text: '出席第 1 次行前培訓（出國前約 14 日・安全健康與行前導讀）', checked: false, isCustom: false },
+      { id: 'chk-3', category: 'docs', text: '出席第 2 次行前培訓（出國前約 7 日・工房禮儀與紀錄片企畫）', checked: false, isCustom: false },
+      { id: 'chk-4', category: 'docs', text: '海外保險保單（200–300 萬意外險 ＋ 20–50 萬海外醫療險）', checked: false, isCustom: false },
+      { id: 'chk-5', category: 'docs', text: '臺灣至日本來回經濟艙電子機票與緊急聯絡卡', checked: false, isCustom: false },
+      { id: 'chk-6', category: 'workshop', text: '工房實作專用工作服 / 圍裙（耐髒、長袖可遮蔽手腕）', checked: false, isCustom: false },
+      { id: 'chk-7', category: 'workshop', text: '漆液過敏防護用品（丁腈防護手套、袖套、長褲）', checked: false, isCustom: false },
+      { id: 'chk-8', category: 'workshop', text: '包覆性佳且方便穿脫之便鞋（部分傳統工房需脫鞋入內）', checked: false, isCustom: false },
+      { id: 'chk-9', category: 'workshop', text: '工藝速寫本、鉛筆與測定小尺（注意部分產線禁止攝影）', checked: false, isCustom: false },
+      { id: 'chk-10', category: 'tech', text: '個人紀錄片拍攝器材（手機/相機、穩定器、備用電池、記憶卡）', checked: false, isCustom: false },
+      { id: 'chk-11', category: 'tech', text: '筆電或平板（用於 D8/D15 整理資料、剪輯影片初稿與 D16 簡報）', checked: false, isCustom: false },
+      { id: 'chk-12', category: 'tech', text: '日本上網 eSIM / SIM 卡與大容量行動電源（需隨身登機）', checked: false, isCustom: false },
+      { id: 'chk-13', category: 'life', text: '日圓現金（建議分裝）與交通 IC 卡（Suica / ICOCA）', checked: false, isCustom: false },
+      { id: 'chk-14', category: 'life', text: '6–7 月石川縣梅雨季折疊傘、薄外套（山區與窯場早晚溫差）', checked: false, isCustom: false },
+      { id: 'chk-15', category: 'life', text: '個人常備藥品（腸胃藥、過敏藥膏、暈車藥、OK繃）', checked: false, isCustom: false }
+    ];
+
+    // ==========================================
+    // 4. LocalStorage 狀態管理
+    // ==========================================
+    const KEYS = {
+      NOTES: 'kanazawa_m28_notes_v2',
+      CHECKLIST: 'kanazawa_m28_checklist_v1',
+      EXPENSES: 'kanazawa_m28_expenses_v1',
+      RATE: 'kanazawa_m28_rate_v1'
+    };
+
     let state = {
       activeTab: 'itinerary',
       stageFilter: 'all',
       searchQuery: '',
-      expandedDays: new Set(itineraryData.map(d => d.day)), // 預設全部展開方便瀏覽
+      expandedDays: new Set(itineraryData.map(d => d.day)),
       editingNoteDays: new Set(),
-      notes: loadNotes()
+      notes: loadJson(KEYS.NOTES, {}),
+      spotCityFilter: 'all',
+      spotSearchQuery: '',
+      checklistFilter: 'all',
+      checklist: loadChecklist(),
+      exchangeRate: parseFloat(localStorage.getItem(KEYS.RATE)) || 0.215,
+      expenseType: 'expense',
+      expenses: loadJson(KEYS.EXPENSES, [])
     };
 
-    function loadNotes() {
+    function loadJson(key, fallback) {
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        return saved ? JSON.parse(saved) : {};
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
       } catch (e) {
-        return {};
+        return fallback;
       }
     }
 
-    function saveNotesToStorage() {
+    function saveJson(key, data) {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.notes));
+        localStorage.setItem(key, JSON.stringify(data));
       } catch (e) {
-        showToast('瀏覽器儲存空間受限，無法保留筆記');
+        showToast('瀏覽器儲存空間已滿');
       }
+    }
+
+    function loadChecklist() {
+      const saved = loadJson(KEYS.CHECKLIST, null);
+      if (saved && Array.isArray(saved) && saved.length > 0) {
+        return saved;
+      }
+      return JSON.parse(JSON.stringify(defaultChecklistData));
     }
 
     // ==========================================
-    // 4. 分頁切換與 UI 控制
+    // 5. 底部 4 分頁切換邏輯
     // ==========================================
     function switchTab(tabName) {
       state.activeTab = tabName;
 
-      // 切換區塊顯示
-      document.getElementById('view-itinerary').classList.toggle('hidden', tabName !== 'itinerary');
-      document.getElementById('view-institutions').classList.toggle('hidden', tabName !== 'institutions');
-      document.getElementById('view-info').classList.toggle('hidden', tabName !== 'info');
+      const views = ['itinerary', 'spots', 'checklist', 'expenses'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.classList.toggle('hidden', v !== tabName);
 
-      // 更新導覽列樣式
-      const tabs = ['itinerary', 'institutions', 'info'];
-      tabs.forEach(t => {
-        const btn = document.getElementById(`tab-btn-${t}`);
-        if (t === tabName) {
-          btn.classList.add('border-shu', 'text-kutani', 'font-bold');
-          btn.classList.remove('border-transparent', 'text-sumiLight', 'font-medium');
-        } else {
-          btn.classList.remove('border-shu', 'text-kutani', 'font-bold');
-          btn.classList.add('border-transparent', 'text-sumiLight', 'font-medium');
+        const btn = document.getElementById(`nav-btn-${v}`);
+        if (btn) {
+          const indicator = btn.querySelector('.nav-indicator');
+          if (v === tabName) {
+            btn.classList.add('text-shu', 'font-bold');
+            btn.classList.remove('text-sumiLight', 'font-medium');
+            if (indicator) indicator.classList.remove('hidden');
+          } else {
+            btn.classList.remove('text-shu', 'font-bold');
+            btn.classList.add('text-sumiLight', 'font-medium');
+            if (indicator) indicator.classList.add('hidden');
+          }
         }
       });
 
@@ -916,7 +1299,7 @@
     }
 
     // ==========================================
-    // 5. 渲染快速跳轉軸與每日行程卡片
+    // 6. 分頁一：【每日行程】渲染與互動
     // ==========================================
     function renderDayJumpBar(filteredDays) {
       const bar = document.getElementById('day-jump-bar');
@@ -926,7 +1309,6 @@
         const isAvailable = filteredSet.has(item.day);
         const hasNote = Boolean(state.notes[item.day] && state.notes[item.day].trim());
         
-        // 階段配色
         let badgeStyle = 'bg-white text-kutani border-kinpaku/40 hover:bg-kutani hover:text-white';
         if (!isAvailable) {
           badgeStyle = 'bg-gray-100 text-gray-400 border-gray-200 opacity-50 pointer-events-none';
@@ -951,16 +1333,14 @@
     function getFilteredItinerary() {
       const q = state.searchQuery.trim().toLowerCase();
       return itineraryData.filter(item => {
-        // 1. 階段篩選
         if (state.stageFilter !== 'all' && item.stage !== state.stageFilter) {
           return false;
         }
-        // 2. 關鍵字搜尋
         if (q) {
-          const instNames = item.institutions
+          const spotNames = item.spotIds
             .map(id => {
-              const inst = institutionsData.find(i => i.id === id);
-              return inst ? `${inst.name} ${inst.jpName} ${inst.craft}` : '';
+              const s = spotsData.find(sp => sp.id === id);
+              return s ? `${s.name} ${s.jpName} ${s.craft} ${s.city}` : '';
             })
             .join(' ');
           const noteText = state.notes[item.day] || '';
@@ -970,10 +1350,11 @@
             item.date,
             item.weekday,
             item.locationTag,
+            item.adjustmentNote || '',
             item.theme,
             item.activities.join(' '),
             item.purpose,
-            instNames,
+            spotNames,
             noteText
           ].join(' ').toLowerCase();
 
@@ -992,7 +1373,6 @@
 
       renderDayJumpBar(filtered);
 
-      // 篩選提示條
       if (state.stageFilter !== 'all' || state.searchQuery.trim() !== '') {
         statusBar.classList.remove('hidden');
         statusText.textContent = `篩選結果：共 ${filtered.length} 天行程`;
@@ -1014,7 +1394,6 @@
         const currentNote = state.notes[item.day] || '';
         const hasNote = currentNote.trim().length > 0;
 
-        // 地點標籤顏色
         let locBadgeClass = 'bg-kutaniLight text-kutani border-kutani/20';
         if (item.stage === 'transition') {
           locBadgeClass = 'bg-kinpakuLight text-kinpakuDark border-kinpaku/30';
@@ -1022,19 +1401,22 @@
           locBadgeClass = 'bg-shuLight text-shu border-shu/20';
         }
 
-        // 見習機構快速標籤
-        const instTagsHtml = item.institutions.map(instId => {
-          const inst = institutionsData.find(i => i.id === instId);
-          if (!inst) return '';
+        // 當日景點快速按鈕（含簡介彈窗與 Google Maps 直達）
+        const spotsActionHtml = item.spotIds.map(spotId => {
+          const spot = spotsData.find(s => s.id === spotId);
+          if (!spot) return '';
+          const gmapUrl = buildGmapUrl(spot.mapQuery);
           return `
-            <button onclick="openInstModal('${inst.id}')"
-              class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold bg-kinpakuLight text-kinpakuDark border border-kinpaku/50 hover:bg-kinpaku hover:text-white transition-colors shadow-2xs">
-              <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"></path>
-              </svg>
-              <span>見習機構：${inst.name}</span>
-              <span class="text-[10px] opacity-80">↗</span>
-            </button>
+            <div class="inline-flex items-center rounded-xl overflow-hidden border border-kinpaku/50 bg-kinpakuLight shadow-2xs">
+              <button onclick="openSpotModal('${spot.id}')"
+                class="px-2.5 py-1.5 text-xs font-bold text-kinpakuDark hover:bg-kinpaku hover:text-white transition-colors flex items-center gap-1">
+                <span>🏛️ ${spot.name}</span>
+              </button>
+              <a href="${gmapUrl}" target="_blank" rel="noopener noreferrer" title="在 Google Maps 開啟位置"
+                class="px-2.5 py-1.5 text-xs font-bold bg-midori text-white hover:bg-midori/90 border-l border-kinpaku/30 transition-colors flex items-center gap-1">
+                <span>📍 地圖</span>
+              </a>
+            </div>
           `;
         }).join('');
 
@@ -1044,21 +1426,17 @@
             <div onclick="toggleDayCard(${item.day})" class="p-4 cursor-pointer select-none active:bg-washiDark/40 transition-colors">
               <div class="flex items-center justify-between gap-2 mb-2">
                 <div class="flex items-center flex-wrap gap-2">
-                  <!-- Day 標籤 -->
                   <span class="px-2.5 py-0.5 rounded-lg bg-kutani text-white font-mono text-xs font-bold tracking-wide">
                     Day ${item.day}
                   </span>
-                  <!-- 日期與星期 -->
                   <span class="text-xs font-medium text-sumiLight font-mono">
                     ${item.date}（${item.weekday}）
                   </span>
-                  <!-- 地點標籤 -->
                   <span class="px-2 py-0.5 rounded-md text-[11px] font-bold border ${locBadgeClass}">
                     ${item.locationTag}
                   </span>
                 </div>
 
-                <!-- 展開/收合箭頭 -->
                 <div class="flex items-center gap-1.5 shrink-0">
                   ${hasNote ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-shuLight text-shu font-bold">有筆記</span>' : ''}
                   <svg class="w-5 h-5 text-sumiLight transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -1067,10 +1445,20 @@
                 </div>
               </div>
 
-              <!-- 主題標題 -->
               <h3 class="font-serif font-bold text-base sm:text-lg text-sumi leading-snug">
                 ${item.theme}
               </h3>
+
+              ${item.adjustmentNote ? `
+                <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-shuLight border border-shu/30 text-shu text-[11px] font-bold">
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span>${item.adjustmentNote}</span>
+                </div>
+              ` : ''}
             </div>
 
             <!-- 卡片展開內容區 -->
@@ -1108,14 +1496,17 @@
                 </div>
               ` : ''}
 
-              <!-- 當天對應見習機構快速標籤 -->
-              ${instTagsHtml ? `
-                <div class="flex flex-wrap gap-2 pt-0.5">
-                  ${instTagsHtml}
+              <!-- 當天造訪景點與 Google Maps 快速連結 -->
+              ${spotsActionHtml ? `
+                <div class="space-y-1.5">
+                  <div class="text-[11px] font-bold text-sumiLight">當日參訪景點與地圖導航：</div>
+                  <div class="flex flex-wrap gap-2">
+                    ${spotsActionHtml}
+                  </div>
                 </div>
               ` : ''}
 
-              <!-- 個人隨手筆記 / 備忘區 (localStorage) -->
+              <!-- 個人隨手筆記 / 備忘區 -->
               <div class="pt-2 border-t border-dashed border-kinpaku/40">
                 ${!isEditingNote && !hasNote ? `
                   <button onclick="openNoteEditor(${item.day})"
@@ -1127,13 +1518,7 @@
                 ${!isEditingNote && hasNote ? `
                   <div class="p-3 rounded-xl bg-kinpakuLight/60 border border-kinpaku/40">
                     <div class="flex items-center justify-between mb-1">
-                      <span class="text-[11px] font-bold text-kinpakuDark flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                        </svg>
-                        我的隨手筆記
-                      </span>
+                      <span class="text-[11px] font-bold text-kinpakuDark">📝 我的隨手筆記</span>
                       <button onclick="openNoteEditor(${item.day})" class="text-xs font-bold text-kutani hover:underline px-1.5 py-0.5">
                         編輯
                       </button>
@@ -1157,7 +1542,7 @@
                       <button onclick="cancelNoteEditor(${item.day})" class="px-3 py-1.5 rounded-lg text-xs font-medium text-sumiLight bg-white border border-gray-200">
                         取消
                       </button>
-                      <button onclick="saveNote(${item.day})" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-kutani shadow-xs">
+                      <button onclick="saveNote(${item.day})" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-kutani shadow-2xs">
                         儲存筆記
                       </button>
                     </div>
@@ -1172,58 +1557,117 @@
     }
 
     // ==========================================
-    // 6. 渲染分頁二：7 大見習機構列表
+    // 7. 分頁二：【見習景點】渲染（含 Google Maps 連結）
     // ==========================================
-    function renderInstitutions() {
-      const container = document.getElementById('institutions-list');
-      container.innerHTML = institutionsData.map((inst, index) => {
+    function setSpotCityFilter(city) {
+      state.spotCityFilter = city;
+      document.querySelectorAll('.spot-city-pill').forEach(btn => {
+        if (btn.dataset.city === city) {
+          btn.classList.add('bg-kutani', 'text-white', 'font-bold', 'shadow-2xs');
+          btn.classList.remove('bg-white', 'text-sumi', 'font-medium');
+        } else {
+          btn.classList.remove('bg-kutani', 'text-white', 'font-bold', 'shadow-2xs');
+          btn.classList.add('bg-white', 'text-sumi', 'font-medium');
+        }
+      });
+      renderSpots();
+    }
+
+    function handleSpotSearch(val) {
+      state.spotSearchQuery = val;
+      document.getElementById('clear-spot-search').classList.toggle('hidden', val.trim() === '');
+      renderSpots();
+    }
+
+    function clearSpotSearch() {
+      document.getElementById('spot-search-input').value = '';
+      handleSpotSearch('');
+    }
+
+    function renderSpots() {
+      const container = document.getElementById('spots-list');
+      const q = state.spotSearchQuery.trim().toLowerCase();
+
+      const filtered = spotsData.filter(spot => {
+        if (state.spotCityFilter !== 'all' && spot.city !== state.spotCityFilter) {
+          return false;
+        }
+        if (q) {
+          const text = `${spot.name} ${spot.jpName} ${spot.city} ${spot.address} ${spot.craft} ${spot.description} d${spot.dayNum}`.toLowerCase();
+          return text.includes(q);
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="py-12 text-center bg-white rounded-2xl border border-kinpaku/30">
+            <p class="font-serif font-bold text-sm text-sumi mb-1">找不到符合的景點</p>
+            <p class="text-xs text-sumiLight">請嘗試其他關鍵字或切換區域篩選</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map((spot, idx) => {
+        const gmapUrl = buildGmapUrl(spot.mapQuery);
         return `
-          <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/35 relative overflow-hidden">
-            <!-- 右上角金箔編號裝飾 -->
+          <article class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/35 relative overflow-hidden">
+            <!-- 頂部標籤列 -->
             <div class="flex items-center justify-between gap-2 mb-2">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-kutaniLight text-kutani border border-kutani/20">
-                ${inst.craft}
-              </span>
-              <button onclick="jumpFromInstitutionToDay(${inst.dayNum})"
-                class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-shuLight text-shu border border-shu/25 hover:bg-shu hover:text-white transition-colors">
-                <span>對應行程：${inst.dayRef}</span>
+              <div class="flex items-center flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-kutani text-white">
+                  ${spot.city}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-kutaniLight text-kutani border border-kutani/20">
+                  ${spot.craft}
+                </span>
+                ${spot.isCoreOrg ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-kinpakuLight text-kinpakuDark border border-kinpaku/40">核心見習機構</span>' : ''}
+              </div>
+
+              <button onclick="jumpFromSpotToDay(${spot.dayNum})"
+                class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-shuLight text-shu border border-shu/25 hover:bg-shu hover:text-white transition-colors">
+                <span>D${spot.dayNum} 行程</span>
                 <span>→</span>
               </button>
             </div>
 
-            <!-- 機構名稱與日文名 -->
-            <div class="mb-2">
-              <h3 class="font-serif text-lg font-bold text-sumi">
-                ${index + 1}. ${inst.name}
-              </h3>
-              <p class="text-xs text-sumiLight font-medium mt-0.5">
-                日文名稱：${inst.jpName}
-              </p>
-            </div>
+            <!-- 景點名稱與日文 -->
+            <h3 class="font-serif text-base sm:text-lg font-bold text-sumi leading-snug">
+              ${spot.name}
+            </h3>
+            <p class="text-xs text-sumiLight font-medium mt-0.5 mb-2">
+              ${spot.jpName}
+            </p>
 
-            <!-- 所在地標籤 -->
-            <div class="inline-flex items-center gap-1.5 text-xs text-sumiLight bg-washi px-2.5 py-1 rounded-lg border border-kinpaku/25 mb-3">
-              <svg class="w-3.5 h-3.5 text-kinpakuDark shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <!-- 地址資訊 -->
+            <div class="flex items-center gap-1.5 text-xs text-sumiLight bg-washi px-2.5 py-1.5 rounded-lg border border-kinpaku/25 mb-2.5">
+              <svg class="w-3.5 h-3.5 text-shu shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <span>${inst.location}</span>
+              <span>${spot.address}</span>
             </div>
 
-            <!-- 研習內容說明 -->
-            <p class="text-xs sm:text-sm text-sumi leading-relaxed mb-4">
-              ${inst.description}
+            <!-- 工藝特色與參訪重點 -->
+            <p class="text-xs sm:text-sm text-sumi leading-relaxed mb-3.5">
+              ${spot.description}
             </p>
 
-            <!-- 底部操作按鈕 -->
-            <div class="pt-3 border-t border-washiDark flex items-center justify-between gap-2">
-              <button onclick="jumpFromInstitutionToDay(${inst.dayNum})"
-                class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-kutani bg-washi hover:bg-kutaniLight border border-kutani/20 transition-colors">
-                查看 ${inst.dayRef} 行程詳情
-              </button>
-              <a href="${inst.url}" target="_blank" rel="noopener noreferrer"
-                class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-white bg-kutani hover:bg-kutani/90 flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
-                <span>官方網站 / 社群</span>
+            <!-- 底部操作按鈕：Google Maps 導航 + 官方連結 -->
+            <div class="pt-3 border-t border-washiDark grid grid-cols-2 gap-2.5">
+              <a href="${gmapUrl}" target="_blank" rel="noopener noreferrer"
+                class="py-2.5 px-3 rounded-xl text-xs font-bold text-white bg-midori hover:bg-midori/90 flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>Google Maps 導航</span>
+              </a>
+
+              <a href="${spot.url}" target="_blank" rel="noopener noreferrer"
+                class="py-2.5 px-3 rounded-xl text-xs font-bold text-kutani bg-washi hover:bg-kutaniLight border border-kutani/25 flex items-center justify-center gap-1.5 transition-colors">
+                <span>官方網站 / 資訊</span>
                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                   <polyline points="15 3 21 3 21 9"></polyline>
@@ -1231,22 +1675,334 @@
                 </svg>
               </a>
             </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // 8. 分頁三：【行前清單】渲染與勾選操作
+    // ==========================================
+    const checklistCategoryLabels = {
+      docs: { title: '必備證件與行前行政', badge: 'bg-shuLight text-shu' },
+      workshop: { title: '工房實作與服裝護具（簡章規定）', badge: 'bg-kinpakuLight text-kinpakuDark' },
+      tech: { title: '影像紀錄與 3C 設備', badge: 'bg-kutaniLight text-kutani' },
+      life: { title: '衣物、資金與生活用品', badge: 'bg-midoriLight text-midori' }
+    };
+
+    function setChecklistFilter(cat) {
+      state.checklistFilter = cat;
+      document.querySelectorAll('.chk-cat-pill').forEach(btn => {
+        if (btn.dataset.chkcat === cat) {
+          btn.classList.add('bg-kutani', 'text-white', 'font-bold');
+          btn.classList.remove('bg-washi', 'text-sumi', 'font-medium');
+        } else {
+          btn.classList.remove('bg-kutani', 'text-white', 'font-bold');
+          btn.classList.add('bg-washi', 'text-sumi', 'font-medium');
+        }
+      });
+      renderChecklist();
+    }
+
+    function toggleChecklistItem(id) {
+      const target = state.checklist.find(i => i.id === id);
+      if (target) {
+        target.checked = !target.checked;
+        saveJson(KEYS.CHECKLIST, state.checklist);
+        renderChecklist();
+      }
+    }
+
+    function addCustomChecklistItem() {
+      const catEl = document.getElementById('new-chk-category');
+      const inputEl = document.getElementById('new-chk-text');
+      const text = inputEl.value.trim();
+      if (!text) {
+        showToast('請輸入待辦項目內容');
+        return;
+      }
+      state.checklist.unshift({
+        id: 'chk-custom-' + Date.now(),
+        category: catEl.value,
+        text: text,
+        checked: false,
+        isCustom: true
+      });
+      saveJson(KEYS.CHECKLIST, state.checklist);
+      inputEl.value = '';
+      renderChecklist();
+      showToast('已新增行前準備項目');
+    }
+
+    function deleteChecklistItem(id) {
+      state.checklist = state.checklist.filter(i => i.id !== id);
+      saveJson(KEYS.CHECKLIST, state.checklist);
+      renderChecklist();
+      showToast('已刪除自訂項目');
+    }
+
+    function resetChecklistConfirm() {
+      state.checklist.forEach(item => item.checked = false);
+      saveJson(KEYS.CHECKLIST, state.checklist);
+      renderChecklist();
+      showToast('已重設所有勾選狀態');
+    }
+
+    function renderChecklist() {
+      const total = state.checklist.length;
+      const done = state.checklist.filter(i => i.checked).length;
+      const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+
+      document.getElementById('checklist-percent').textContent = `${percent}%`;
+      document.getElementById('checklist-count').textContent = `${done} / ${total} 項已完成`;
+      document.getElementById('checklist-progress-bar').style.width = `${percent}%`;
+
+      const container = document.getElementById('checklist-container');
+      const categories = state.checklistFilter === 'all'
+        ? ['docs', 'workshop', 'tech', 'life']
+        : [state.checklistFilter];
+
+      container.innerHTML = categories.map(catKey => {
+        const items = state.checklist.filter(i => i.category === catKey);
+        if (items.length === 0) return '';
+        const meta = checklistCategoryLabels[catKey];
+        const catDone = items.filter(i => i.checked).length;
+
+        return `
+          <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
+            <div class="flex items-center justify-between mb-3 pb-2 border-b border-washiDark">
+              <span class="px-2.5 py-0.5 rounded-lg text-xs font-bold ${meta.badge}">
+                ${meta.title}
+              </span>
+              <span class="text-xs font-mono text-sumiLight">${catDone}/${items.length}</span>
+            </div>
+
+            <div class="divide-y divide-washiDark">
+              ${items.map(item => `
+                <div class="py-2.5 flex items-start gap-3">
+                  <input type="checkbox" id="${item.id}" ${item.checked ? 'checked' : ''}
+                    onchange="toggleChecklistItem('${item.id}')"
+                    class="custom-checkbox mt-0.5 w-5 h-5 rounded-md border-2 border-kinpaku/60 text-midori focus:ring-0 cursor-pointer shrink-0" />
+                  <label for="${item.id}" class="flex-1 text-xs sm:text-sm leading-relaxed cursor-pointer select-none ${item.checked ? 'line-through text-sumiLight/70' : 'text-sumi font-medium'}">
+                    ${escapeHtml(item.text)}
+                    ${item.isCustom ? '<span class="ml-1.5 px-1.5 py-0.2 rounded text-[10px] bg-washiDark text-sumiLight">自訂</span>' : ''}
+                  </label>
+                  ${item.isCustom ? `
+                    <button onclick="deleteChecklistItem('${item.id}')" title="刪除此項目"
+                      class="text-sumiLight hover:text-shu p-1 shrink-0">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
           </div>
         `;
       }).join('');
     }
 
     // ==========================================
-    // 7. 互動功能函式 (篩選、搜尋、跳轉、筆記、彈窗)
+    // 9. 分頁四：【收支記帳】雙幣記帳與預算追蹤
+    // ==========================================
+    function initExpenseDayOptions() {
+      const select = document.getElementById('exp-day');
+      itineraryData.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = `Day ${d.day} (${d.date.slice(4)})`;
+        opt.textContent = `Day ${d.day}｜${d.date}（${d.locationTag}）`;
+        select.appendChild(opt);
+      });
+      document.getElementById('exchange-rate-input').value = state.exchangeRate;
+    }
+
+    function updateExchangeRate(val) {
+      const rate = parseFloat(val);
+      if (isNaN(rate) || rate <= 0) {
+        showToast('請輸入有效匯率');
+        return;
+      }
+      state.exchangeRate = rate;
+      localStorage.setItem(KEYS.RATE, rate.toString());
+      updateLiveConversionPreview();
+      renderExpenses();
+      showToast(`已更新匯率：1 JPY = ${rate} TWD`);
+    }
+
+    function setExpenseType(type) {
+      state.expenseType = type;
+      const btnExp = document.getElementById('type-btn-expense');
+      const btnInc = document.getElementById('type-btn-income');
+      if (type === 'expense') {
+        btnExp.classList.add('bg-shu', 'text-white', 'font-bold', 'shadow-2xs');
+        btnExp.classList.remove('text-sumiLight', 'font-medium');
+        btnInc.classList.remove('bg-midori', 'text-white', 'font-bold', 'shadow-2xs');
+        btnInc.classList.add('text-sumiLight', 'font-medium');
+      } else {
+        btnInc.classList.add('bg-midori', 'text-white', 'font-bold', 'shadow-2xs');
+        btnInc.classList.remove('text-sumiLight', 'font-medium');
+        btnExp.classList.remove('bg-shu', 'text-white', 'font-bold', 'shadow-2xs');
+        btnExp.classList.add('text-sumiLight', 'font-medium');
+      }
+    }
+
+    function updateLiveConversionPreview() {
+      const currency = document.getElementById('exp-currency').value;
+      const amount = parseFloat(document.getElementById('exp-amount').value) || 0;
+      const hintEl = document.getElementById('live-convert-hint');
+
+      if (currency === 'JPY') {
+        const twd = Math.round(amount * state.exchangeRate);
+        hintEl.textContent = `≈ NT$ ${twd.toLocaleString()}`;
+      } else {
+        const jpy = Math.round(amount / state.exchangeRate);
+        hintEl.textContent = `≈ ¥ ${jpy.toLocaleString()} JPY`;
+      }
+    }
+
+    function addExpenseRecord() {
+      const day = document.getElementById('exp-day').value;
+      const category = document.getElementById('exp-category').value;
+      const currency = document.getElementById('exp-currency').value;
+      const amountInput = document.getElementById('exp-amount');
+      const noteInput = document.getElementById('exp-note');
+
+      const amount = parseFloat(amountInput.value);
+      if (isNaN(amount) || amount <= 0) {
+        showToast('請輸入大於 0 的金額');
+        amountInput.focus();
+        return;
+      }
+
+      const record = {
+        id: 'exp-' + Date.now(),
+        type: state.expenseType,
+        day,
+        category,
+        currency,
+        amount,
+        note: noteInput.value.trim() || category
+      };
+
+      state.expenses.unshift(record);
+      saveJson(KEYS.EXPENSES, state.expenses);
+
+      amountInput.value = '';
+      noteInput.value = '';
+      updateLiveConversionPreview();
+      renderExpenses();
+      showToast(state.expenseType === 'expense' ? '已新增一筆支出紀錄' : '已新增一筆收入紀錄');
+    }
+
+    function deleteExpenseRecord(id) {
+      state.expenses = state.expenses.filter(r => r.id !== id);
+      saveJson(KEYS.EXPENSES, state.expenses);
+      renderExpenses();
+      showToast('已刪除該筆帳務紀錄');
+    }
+
+    function renderExpenses() {
+      const listEl = document.getElementById('expense-list');
+      const countEl = document.getElementById('exp-record-count');
+      countEl.textContent = `共 ${state.expenses.length} 筆`;
+
+      // 計算累計支出與收入（折合 TWD）
+      let totalExpenseTwd = 0;
+      let totalIncomeTwd = 0;
+
+      state.expenses.forEach(rec => {
+        const twdVal = rec.currency === 'JPY'
+          ? rec.amount * state.exchangeRate
+          : rec.amount;
+        if (rec.type === 'expense') {
+          totalExpenseTwd += twdVal;
+        } else {
+          totalIncomeTwd += twdVal;
+        }
+      });
+
+      const roundedExpenseTwd = Math.round(totalExpenseTwd);
+      const roundedExpenseJpy = Math.round(totalExpenseTwd / state.exchangeRate);
+
+      // 簡章青年自理預算：零用金 NT$ 5,217；總自理（含機票20,000+保險1,800）NT$ 27,017
+      const pocketRemain = Math.round(5217 + totalIncomeTwd - totalExpenseTwd);
+      const selfRemain = Math.round(27017 + totalIncomeTwd - totalExpenseTwd);
+
+      document.getElementById('exp-total-twd').textContent = `NT$ ${roundedExpenseTwd.toLocaleString()}`;
+      document.getElementById('exp-total-jpy').textContent = `≈ ¥ ${roundedExpenseJpy.toLocaleString()} JPY`;
+
+      const pocketEl = document.getElementById('exp-pocket-remain');
+      pocketEl.textContent = `NT$ ${pocketRemain.toLocaleString()}`;
+      pocketEl.className = `font-serif text-xl font-black mt-0.5 ${pocketRemain < 0 ? 'text-red-300' : 'text-kinpaku'}`;
+
+      document.getElementById('exp-self-remain').textContent = `自理總餘：NT$ ${selfRemain.toLocaleString()}`;
+
+      if (state.expenses.length === 0) {
+        listEl.innerHTML = `
+          <div class="py-10 text-center">
+            <p class="text-xs text-sumiLight">尚無收支紀錄，上方輸入金額即可開始雙幣記帳！</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = state.expenses.map(rec => {
+        const isExpense = rec.type === 'expense';
+        const convertedText = rec.currency === 'JPY'
+          ? `≈ NT$ ${Math.round(rec.amount * state.exchangeRate).toLocaleString()}`
+          : `≈ ¥ ${Math.round(rec.amount / state.exchangeRate).toLocaleString()}`;
+        const symbol = rec.currency === 'JPY' ? '¥' : 'NT$';
+
+        return `
+          <div class="py-3 flex items-center justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center flex-wrap gap-1.5 mb-0.5">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-washiDark text-kutani">
+                  ${rec.category}
+                </span>
+                <span class="text-[11px] font-mono text-sumiLight">
+                  ${rec.day}
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm font-bold text-sumi truncate">
+                ${escapeHtml(rec.note)}
+              </p>
+            </div>
+
+            <div class="text-right shrink-0">
+              <div class="font-mono text-sm font-bold ${isExpense ? 'text-shu' : 'text-midori'}">
+                ${isExpense ? '-' : '+'}${symbol} ${rec.amount.toLocaleString()}
+              </div>
+              <div class="text-[11px] font-mono text-sumiLight">
+                ${convertedText}
+              </div>
+            </div>
+
+            <button onclick="deleteExpenseRecord('${rec.id}')" title="刪除紀錄"
+              class="p-1.5 text-sumiLight hover:text-shu shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // 10. 通用互動函式（搜尋、跳轉、筆記、彈窗）
     // ==========================================
     function setStageFilter(stage) {
       state.stageFilter = stage;
       document.querySelectorAll('.stage-pill').forEach(btn => {
         if (btn.dataset.stage === stage) {
-          btn.classList.add('bg-kutani', 'text-white', 'font-bold', 'shadow-sm');
+          btn.classList.add('bg-kutani', 'text-white', 'font-bold', 'shadow-2xs');
           btn.classList.remove('bg-white', 'text-sumi', 'font-medium');
         } else {
-          btn.classList.remove('bg-kutani', 'text-white', 'font-bold', 'shadow-sm');
+          btn.classList.remove('bg-kutani', 'text-white', 'font-bold', 'shadow-2xs');
           btn.classList.add('bg-white', 'text-sumi', 'font-medium');
         }
       });
@@ -1255,9 +2011,7 @@
 
     function handleSearch(val) {
       state.searchQuery = val;
-      const clearBtn = document.getElementById('clear-search-btn');
-      clearBtn.classList.toggle('hidden', val.trim() === '');
-      // 搜尋時自動展開符合的卡片，方便手機直接看內容
+      document.getElementById('clear-search-btn').classList.toggle('hidden', val.trim() === '');
       if (val.trim() !== '') {
         itineraryData.forEach(d => state.expandedDays.add(d.day));
       }
@@ -1265,8 +2019,7 @@
     }
 
     function clearSearch() {
-      const input = document.getElementById('search-input');
-      input.value = '';
+      document.getElementById('search-input').value = '';
       handleSearch('');
     }
 
@@ -1296,27 +2049,25 @@
     }
 
     function jumpToDay(dayNum) {
-      // 確保卡片是展開的
       state.expandedDays.add(dayNum);
       renderItinerary();
 
       setTimeout(() => {
         const card = document.getElementById(`day-card-${dayNum}`);
-        const nav = document.getElementById('sticky-nav');
+        const tools = document.getElementById('sticky-itinerary-tools');
         if (card) {
-          const navHeight = nav ? nav.offsetHeight : 56;
-          const topPos = card.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+          const offset = tools ? tools.offsetHeight : 120;
+          const topPos = card.getBoundingClientRect().top + window.scrollY - offset - 12;
           window.scrollTo({ top: topPos, behavior: 'smooth' });
           card.classList.remove('highlight-card');
-          void card.offsetWidth; // 觸發重繪以重播動畫
+          void card.offsetWidth;
           card.classList.add('highlight-card');
         }
       }, 60);
     }
 
-    function jumpFromInstitutionToDay(dayNum) {
+    function jumpFromSpotToDay(dayNum) {
       switchTab('itinerary');
-      // 若目前有篩選條件導致該天被隱藏，自動重設篩選
       if (state.stageFilter !== 'all' || state.searchQuery !== '') {
         resetAllFilters();
       }
@@ -1349,44 +2100,49 @@
         delete state.notes[dayNum];
         showToast(`已清除 Day ${dayNum} 筆記`);
       }
-      saveNotesToStorage();
+      saveJson(KEYS.NOTES, state.notes);
       state.editingNoteDays.delete(dayNum);
       renderItinerary();
     }
 
     function deleteNote(dayNum) {
       delete state.notes[dayNum];
-      saveNotesToStorage();
+      saveJson(KEYS.NOTES, state.notes);
       state.editingNoteDays.delete(dayNum);
       renderItinerary();
       showToast(`已刪除 Day ${dayNum} 筆記`);
     }
 
-    // 機構快速簡介 Modal
-    function openInstModal(instId) {
-      const inst = institutionsData.find(i => i.id === instId);
-      if (!inst) return;
-      document.getElementById('modal-craft-tag').textContent = `${inst.craft}｜對應 ${inst.dayRef}`;
-      document.getElementById('modal-title').textContent = inst.name;
-      document.getElementById('modal-jp-name').textContent = `日文名稱：${inst.jpName}`;
-      document.getElementById('modal-location').textContent = inst.location;
-      document.getElementById('modal-desc').textContent = inst.description;
-      document.getElementById('modal-link').href = inst.url;
-      document.getElementById('inst-modal').classList.remove('hidden');
+    // 景點彈窗控制
+    function openSpotModal(spotId) {
+      const spot = spotsData.find(s => s.id === spotId);
+      if (!spot) return;
+      document.getElementById('modal-craft-tag').textContent = `${spot.city}｜${spot.craft}`;
+      document.getElementById('modal-title').textContent = spot.name;
+      document.getElementById('modal-jp-name').textContent = spot.jpName;
+      document.getElementById('modal-location').textContent = spot.address;
+      document.getElementById('modal-desc').textContent = spot.description;
+      document.getElementById('modal-gmap-link').href = buildGmapUrl(spot.mapQuery);
+      document.getElementById('modal-web-link').href = spot.url;
+      document.getElementById('spot-modal').classList.remove('hidden');
     }
 
-    function closeInstModal(e) {
-      if (!e || e.target.id === 'inst-modal') {
-        document.getElementById('inst-modal').classList.add('hidden');
+    function closeSpotModal(e) {
+      if (!e || e.target.id === 'spot-modal') {
+        document.getElementById('spot-modal').classList.add('hidden');
       }
     }
 
-    function goToInstitutionsTab() {
-      closeInstModal();
-      switchTab('institutions');
+    function openInfoModal() {
+      document.getElementById('info-modal').classList.remove('hidden');
     }
 
-    // 工具函式
+    function closeInfoModal(e) {
+      if (!e || e.target.id === 'info-modal') {
+        document.getElementById('info-modal').classList.add('hidden');
+      }
+    }
+
     function escapeHtml(str) {
       return str
         .replace(/&/g, '&amp;')
@@ -1407,10 +2163,13 @@
       }, 2200);
     }
 
-    // 初始化渲染
+    // 初始化所有模組
     window.addEventListener('DOMContentLoaded', () => {
+      initExpenseDayOptions();
       renderItinerary();
-      renderInstitutions();
+      renderSpots();
+      renderChecklist();
+      renderExpenses();
     });
   </script>
 </body>
