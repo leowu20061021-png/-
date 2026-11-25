@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>M-2-8 金澤職人夢｜17日見習行程與機構查閱</title>
+  <!-- 引入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入 Google Fonts：思源宋體 (Noto Serif TC) 與 思源黑體 (Noto Sans TC) 營造日式工藝質感 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            washi: '#FAF8F5',       // 和紙米白底色
+            washiDark: '#F2EDE4',   // 次要和紙區塊底色
+            sumi: '#1E1E1E',        // 深墨黑主文字
+            sumiLight: '#57534E',   // 淡墨次要文字
+            kutani: '#1D3557',      // 九谷燒深藍 (吳須藍)
+            kutaniLight: '#EBF0F5', // 九谷淺藍底
+            shu: '#C13832',         // 傳統朱紅 (印章/赤繪紅)
+            shuLight: '#FDF1F0',    // 淺朱紅底
+            kinpaku: '#C5A059',     // 金澤金箔色
+            kinpakuDark: '#9A7835', // 深金箔色
+            kinpakuLight: '#FBF7EE',// 淡金箔底色
+            urushi: '#4A2511',      // 山中漆器栗皮色
+          },
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'serif'],
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+          },
+          boxShadow: {
+            'washi': '0 4px 16px -2px rgba(29, 53, 87, 0.06), 0 1px 4px -1px rgba(0, 0, 0, 0.04)',
+            'gold': '0 4px 14px -2px rgba(197, 160, 89, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* 基礎和紙紋理與平滑捲動設定 */
+    html {
+      scroll-behavior: smooth;
+      background-color: #FAF8F5;
+      color: #1E1E1E;
+      font-family: 'Noto Sans TC', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #FAF8F5;
+      /* 細微和紙纖維點狀質感 */
+      background-image: radial-gradient(rgba(197, 160, 89, 0.14) 1px, transparent 0),
+                        radial-gradient(rgba(29, 53, 87, 0.06) 1px, transparent 0);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    /* 隱藏橫向捲動軸但保留滑動功能 */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* 金澤金箔漸層質感 */
+    .gold-foil-gradient {
+      background: linear-gradient(135deg, #D9B973 0%, #C5A059 45%, #E5C989 75%, #B08B43 100%);
+    }
+    
+    .gold-foil-border {
+      border: 1px solid rgba(197, 160, 89, 0.45);
+    }
+
+    /* 卡片展開動畫 */
+    .accordion-content {
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* 閃爍高亮動畫（從機構跳轉至行程時觸發） */
+    @keyframes highlightPulse {
+      0% { box-shadow: 0 0 0 0 rgba(193, 56, 50, 0.6); transform: scale(1.01); }
+      50% { box-shadow: 0 0 0 8px rgba(193, 56, 50, 0); transform: scale(1.01); }
+      100% { box-shadow: 0 0 0 0 rgba(193, 56, 50, 0); transform: scale(1); }
+    }
+    .highlight-card {
+      animation: highlightPulse 1.4s ease-out;
+      border-color: #C13832 !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center pb-16">
+
+  <!-- 主容器：限制最大寬度以兼顧手機全螢幕與平板/桌面置中閱讀體驗 -->
+  <div class="w-full max-w-2xl bg-washi/95 min-h-screen shadow-washi border-x border-kinpaku/20 flex flex-col">
+
+    <!-- 1. 頂部標題區 (日式工藝視覺) -->
+    <header class="relative overflow-hidden bg-kutani text-washi px-5 pt-6 pb-5">
+      <!-- 背景幾何裝飾：象徵九谷五彩與金箔圓紋 -->
+      <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full border border-kinpaku/30 opacity-40 pointer-events-none"></div>
+      <div class="absolute -right-3 -top-3 w-24 h-24 rounded-full gold-foil-gradient opacity-15 pointer-events-none"></div>
+      <div class="absolute left-0 top-0 w-full h-1 gold-foil-gradient"></div>
+
+      <!-- 計畫系列標籤 -->
+      <div class="flex items-center justify-between gap-2 mb-2">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/10 text-kinpaku border border-kinpaku/40">
+          <span class="w-1.5 h-1.5 rounded-full bg-kinpaku"></span>
+          青年百億海外圓夢基金計畫・海外翱翔組
+        </span>
+        <span class="text-[11px] text-white/70 font-mono tracking-wider">M-2-8</span>
+      </div>
+
+      <!-- 主標題與朱紅印章 -->
+      <div class="flex items-center gap-3 my-1.5">
+        <h1 class="font-serif text-2xl sm:text-3xl font-black tracking-wide text-white leading-tight">
+          M-2-8 金澤職人夢
+        </h1>
+        <!-- 日式落款印章 -->
+        <span class="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded bg-shu text-white font-serif text-xs font-bold border border-white/30 shadow-sm select-none" title="石川工藝">
+          職人
+        </span>
+      </div>
+
+      <!-- 期間與地點資訊列 -->
+      <div class="mt-3 pt-2.5 border-t border-white/15 flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs sm:text-sm text-white/90">
+        <span class="inline-flex items-center gap-1.5 font-medium">
+          <!-- 日曆圖示 -->
+          <svg class="w-4 h-4 text-kinpaku shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          116/06/20 - 116/07/06（共17日）
+        </span>
+        <span class="text-white/40 hidden sm:inline">|</span>
+        <span class="inline-flex items-center gap-1.5 font-medium">
+          <!-- 地標圖示 -->
+          <svg class="w-4 h-4 text-kinpaku shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          日本・石川縣（加賀・金澤）
+        </span>
+      </div>
+    </header>
+
+    <!-- 2. 分頁導覽列 (Sticky 固定於頂部，方便單手切換) -->
+    <nav id="sticky-nav" class="sticky top-0 z-30 bg-washi/95 backdrop-blur-md border-b border-kinpaku/30 shadow-sm">
+      <div class="grid grid-cols-3 text-center">
+        <button onclick="switchTab('itinerary')" id="tab-btn-itinerary"
+          class="tab-btn py-3.5 px-2 text-sm font-bold flex items-center justify-center gap-1.5 border-b-2 border-shu text-kutani transition-colors">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
+          </svg>
+          <span>每日行程</span>
+        </button>
+
+        <button onclick="switchTab('institutions')" id="tab-btn-institutions"
+          class="tab-btn py-3.5 px-2 text-sm font-medium flex items-center justify-center gap-1.5 border-b-2 border-transparent text-sumiLight hover:text-kutani transition-colors">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"></path>
+          </svg>
+          <span>見習機構</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-kinpakuLight text-kinpakuDark font-bold border border-kinpaku/30">7</span>
+        </button>
+
+        <button onclick="switchTab('info')" id="tab-btn-info"
+          class="tab-btn py-3.5 px-2 text-sm font-medium flex items-center justify-center gap-1.5 border-b-2 border-transparent text-sumiLight hover:text-kutani transition-colors">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <span>行前與須知</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- 分頁一：【每日行程】                         -->
+    <!-- ========================================== -->
+    <main id="view-itinerary" class="flex-1 flex flex-col">
+      
+      <!-- 搜尋與控制工具列 -->
+      <div class="px-4 pt-4 pb-2 space-y-3 bg-washiDark/60 border-b border-kinpaku/20">
+        <!-- 關鍵字搜尋框 -->
+        <div class="relative">
+          <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-sumiLight">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" id="search-input" oninput="handleSearch(this.value)"
+            placeholder="搜尋行程、工法或機構（如：箔一、九谷燒、漆器、自由時間）"
+            class="w-full pl-9 pr-9 py-2.5 text-sm bg-white rounded-xl border border-kinpaku/40 text-sumi placeholder-sumiLight/70 focus:outline-none focus:ring-2 focus:ring-kutani/30 focus:border-kutani shadow-sm" />
+          <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-2.5 flex items-center text-sumiLight hover:text-shu p-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 階段篩選器（橫向滑動膠囊按鈕） -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+          <button onclick="setStageFilter('all')" data-stage="all"
+            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold bg-kutani text-white shadow-sm transition-all">
+            全部 (17天)
+          </button>
+          <button onclick="setStageFilter('kaga')" data-stage="kaga"
+            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
+            加賀地區 (D1-D6)
+          </button>
+          <button onclick="setStageFilter('transition')" data-stage="transition"
+            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
+            移動與整理 (D7-D8)
+          </button>
+          <button onclick="setStageFilter('kanazawa')" data-stage="kanazawa"
+            class="stage-pill shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-sumi border border-kinpaku/40 hover:border-kutani transition-all">
+            金澤地區 (D9-D17)
+          </button>
+        </div>
+
+        <!-- Day 1 ~ Day 17 快速跳轉日期滑動條 -->
+        <div class="pt-1">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-medium text-sumiLight flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-kinpakuDark" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polyline points="13 17 18 12 13 7"></polyline>
+                <polyline points="6 17 11 12 6 7"></polyline>
+              </svg>
+              快速跳轉日期軸
+            </span>
+            <div class="flex items-center gap-2">
+              <button onclick="toggleAllDays(true)" class="text-[11px] font-medium text-kutani hover:underline px-1.5 py-0.5 rounded bg-kutaniLight/70">
+                全部展開
+              </button>
+              <button onclick="toggleAllDays(false)" class="text-[11px] font-medium text-sumiLight hover:underline px-1.5 py-0.5 rounded bg-white border border-gray-200">
+                全部收合
+              </button>
+            </div>
+          </div>
+          <div id="day-jump-bar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1.5">
+            <!-- 由 JS 動態產生 D1 ~ D17 按鈕 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 行程列表狀態提示 (搜尋結果數) -->
+      <div id="filter-status-bar" class="hidden px-4 py-2 bg-kinpakuLight border-b border-kinpaku/30 flex items-center justify-between text-xs text-kinpakuDark">
+        <span id="filter-status-text">顯示 17 天行程</span>
+        <button onclick="resetAllFilters()" class="font-bold underline text-shu">重設篩選</button>
+      </div>
+
+      <!-- 每日行程卡片容器 -->
+      <div id="itinerary-list" class="p-4 space-y-4">
+        <!-- 由 JS 動態渲染 17 天卡片 -->
+      </div>
+
+      <!-- 查無結果提示 -->
+      <div id="empty-state" class="hidden py-14 px-6 text-center">
+        <div class="w-12 h-12 rounded-full bg-washiDark mx-auto flex items-center justify-center text-sumiLight mb-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <p class="font-serif font-bold text-base text-sumi mb-1">找不到符合的行程內容</p>
+        <p class="text-xs text-sumiLight mb-4">請嘗試其他關鍵字（例如：九谷燒、漆器、金箔、東茶屋街）</p>
+        <button onclick="resetAllFilters()" class="px-4 py-2 rounded-xl bg-kutani text-white text-xs font-bold shadow-sm">
+          顯示全部 17 日行程
+        </button>
+      </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- 分頁二：【見習機構】                         -->
+    <!-- ========================================== -->
+    <section id="view-institutions" class="hidden flex-1 p-4 space-y-4">
+      <!-- 區塊導言 -->
+      <div class="bg-kinpakuLight/80 border border-kinpaku/40 rounded-2xl p-4 shadow-sm">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2 h-5 rounded-full bg-shu"></span>
+          <h2 class="font-serif font-bold text-base text-kutani">石川縣傳統工藝 7 大重點見習機構</h2>
+        </div>
+        <p class="text-xs text-sumiLight leading-relaxed">
+          涵蓋金澤金箔、九谷燒（赤繪細描、五彩、金彩、現代窯元）、山中漆器與加賀象嵌等代表性窯元、工房與公設育成機構。點擊「查看當日行程」可直接跳轉至對應見習日。
+        </p>
+      </div>
+
+      <!-- 7 大見習機構卡片列表 -->
+      <div id="institutions-list" class="space-y-4">
+        <!-- 由 JS 動態渲染 -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 分頁三：【行前與須知】                       -->
+    <!-- ========================================== -->
+    <section id="view-info" class="hidden flex-1 p-4 space-y-5">
+      
+      <!-- 1. 申請資格與錄取名額摘要 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-washiDark">
+          <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-kinpaku rounded-full"></span>
+            計畫基本資訊與資格摘要
+          </h2>
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-shuLight text-shu border border-shu/20">
+            見習名額：10 名
+          </span>
+        </div>
+        <ul class="space-y-2 text-xs sm:text-sm text-sumi leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-kinpakuDark font-bold mt-0.5">●</span>
+            <span><strong>圓夢期間：</strong>民國 116 年 6 月 20 日至 7 月 6 日（含飛行日，共 17 日）。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-kinpakuDark font-bold mt-0.5">●</span>
+            <span><strong>語言要求：</strong>具備基礎日語會話及聽力能力（約 JLPT N4 / CEFR A2 以上，優於 N4 者加分），或具備良好英語溝通能力（約 CEFR B1）。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-kinpakuDark font-bold mt-0.5">●</span>
+            <span><strong>青年義務：</strong>能全程參與海外見習行程，並配合完成成果紀錄、個人紀錄片拍攝與社群宣傳等義務。</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 2. 行前培訓時程與重點 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-kutani rounded-full"></span>
+            行前培訓（共 2 次・合計約 8 小時）
+          </h2>
+        </div>
+        <div class="mb-3 px-3 py-2 rounded-xl bg-shuLight border border-shu/25 text-xs text-shu font-medium">
+          ⚠️ 重要規定：若無法參加行前培訓，視同放棄錄取資格。採實體與線上同步進行（暫定臺北市仁美國際會議室 / TAI-ONE SPACE）。
+        </div>
+
+        <div class="space-y-3">
+          <!-- 第1次培訓 -->
+          <div class="p-3.5 rounded-xl bg-washi border border-kinpaku/30">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-bold text-sm text-kutani">第 1 次行前培訓</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-kutaniLight text-kutani">出國前約 14 日（約4小時）</span>
+            </div>
+            <p class="text-xs text-sumi leading-relaxed">
+              海外研修安全與健康管理、當地生活與交通說明、詳細行程與分組確認、行前教材導讀與預習說明。
+            </p>
+          </div>
+
+          <!-- 第2次培訓 -->
+          <div class="p-3.5 rounded-xl bg-washi border border-kinpaku/30">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-bold text-sm text-kutani">第 2 次行前培訓</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-kutaniLight text-kutani">出國前約 7 日（約4小時）</span>
+            </div>
+            <p class="text-xs text-sumi leading-relaxed">
+              工房實作禮儀、服裝及護具準備（如<strong class="text-shu">漆液過敏防護</strong>、<strong class="text-shu">部分區域攝影限制</strong>）、個人紀錄片拍攝企畫討論與最終行前確認。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 經費結構一覽 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/30">
+        <div class="flex items-center justify-between mb-3 pb-2 border-b border-washiDark">
+          <h2 class="font-serif font-bold text-base text-kutani flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-kinpaku rounded-full"></span>
+            經費規劃與獎勵金結構
+          </h2>
+          <span class="font-serif font-bold text-sm text-kinpakuDark">總計 250,000 元</span>
+        </div>
+
+        <!-- 總額卡片 -->
+        <div class="grid grid-cols-2 gap-2.5 mb-4">
+          <div class="p-3 rounded-xl bg-kutani text-white">
+            <div class="text-[11px] text-white/75">合作單位辦理項目</div>
+            <div class="font-serif text-lg font-bold text-kinpaku mt-0.5">222,983 元</div>
+          </div>
+          <div class="p-3 rounded-xl bg-kinpakuLight border border-kinpaku/40 text-sumi">
+            <div class="text-[11px] text-sumiLight">青年自理項目</div>
+            <div class="font-serif text-lg font-bold text-kutani mt-0.5">27,017 元</div>
+          </div>
+        </div>
+
+        <!-- 青年自理明細 -->
+        <div class="mb-4">
+          <h3 class="text-xs font-bold text-kutani mb-2 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-shu"></span>
+            青年自理項目明細（共 27,017 元）
+          </h3>
+          <div class="bg-washi rounded-xl border border-kinpaku/25 divide-y divide-kinpaku/20 text-xs">
+            <div class="p-2.5 flex justify-between items-start gap-2">
+              <div>
+                <span class="font-bold text-sumi">機票</span>
+                <p class="text-[11px] text-sumiLight mt-0.5">臺灣至計畫執行地之來回經濟艙機票</p>
+              </div>
+              <span class="font-mono font-bold text-kutani shrink-0">20,000 元</span>
+            </div>
+            <div class="p-2.5 flex justify-between items-start gap-2">
+              <div>
+                <span class="font-bold text-sumi">零用金</span>
+                <p class="text-[11px] text-sumiLight mt-0.5">青年個人海外零用金</p>
+              </div>
+              <span class="font-mono font-bold text-kutani shrink-0">5,217 元</span>
+            </div>
+            <div class="p-2.5 flex justify-between items-start gap-2">
+              <div>
+                <span class="font-bold text-sumi">保險費</span>
+                <p class="text-[11px] text-sumiLight mt-0.5">投保至少 200 至 300 萬元意外險及 20 至 50 萬元海外醫療險</p>
+              </div>
+              <span class="font-mono font-bold text-kutani shrink-0">1,800 元</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 合作單位支用範圍 -->
+        <div>
+          <h3 class="text-xs font-bold text-kutani mb-2 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-kutani"></span>
+            合作單位辦理支用內容（共 222,983 元）
+          </h3>
+          <div class="bg-washi rounded-xl p-3 border border-kinpaku/25 text-xs text-sumi space-y-1.5 leading-relaxed">
+            <p>• <strong>生活費與交通：</strong>包含見習期間餐費、住宿費、當地交通費及跨城市移動大眾運輸/租車費用。</p>
+            <p>• <strong>機構參訪與研習費：</strong>能美市九谷燒美術館導覽、石川縣九谷燒技術中心研修、CERABO KUTANI 等機構報名與研習費用。</p>
+            <p>• <strong>專業支援與行政：</strong>行前培訓講師費、專業課程與參訪口譯翻譯費、設備與場地使用費、印刷雜支、行政管理費及隨團業師輔導相關費用。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. 其他重要注意事項 -->
+      <div class="bg-white rounded-2xl p-4 shadow-washi border border-shu/30">
+        <h2 class="font-serif font-bold text-base text-shu flex items-center gap-2 mb-3">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          重要規範與注意事項
+        </h2>
+        <ul class="space-y-2.5 text-xs text-sumi leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-shu font-bold">1.</span>
+            <span><strong>簽證辦理期限：</strong>請依計畫內容辦理所需簽證，並於「圓夢期間」規定出發日期前取得；逾期未取得者視同放棄錄取資格，不得提出異議。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-shu font-bold">2.</span>
+            <span><strong>全程參與義務：</strong>錄取者須全程參與計畫行程（含行前培訓、說明會、集訓及成果發表會），並配合合作單位相關行政作業。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-shu font-bold">3.</span>
+            <span><strong>請假與獎勵金追回規範：</strong>出國圓夢期間不得因個人因素請假或無故缺席，若無法全程參與則視同未完成本計畫，須繳回未執行日數或全部之獎勵金金額。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-shu font-bold">4.</span>
+            <span><strong>紀律與法令遵守：</strong>若未能依據計畫學習、未能遵守團體規範或違反本國、當地國相關法令者，將提早終止計畫執行或酌情追回部分、全部獎勵金。</span>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- 頁尾宣告 -->
+    <footer class="mt-auto px-5 py-6 text-center border-t border-kinpaku/25 bg-washiDark/50">
+      <p class="text-xs text-sumiLight font-medium">
+        以上內容教育部青年發展署及合作單位保有調整及最終解釋之權利
+      </p>
+      <p class="text-[11px] text-sumiLight/70 mt-1">
+        M-2-8 金澤職人夢｜行動版行程與見習手冊
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- 機構快速簡介彈窗 (Modal，供行程卡片點擊機構標籤時即時查看) -->
+  <div id="inst-modal" class="hidden fixed inset-0 z-50 bg-sumi/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="closeInstModal(event)">
+    <div class="bg-washi w-full max-w-lg rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl border-t-4 border-kinpaku animate-slide-up" onclick="event.stopPropagation()">
+      <div class="flex items-start justify-between gap-3 mb-3">
+        <div>
+          <span id="modal-craft-tag" class="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-kutaniLight text-kutani mb-1.5">工藝類別</span>
+          <h3 id="modal-title" class="font-serif text-xl font-bold text-sumi">機構名稱</h3>
+          <p id="modal-jp-name" class="text-xs text-sumiLight mt-0.5">日文名稱</p>
+        </div>
+        <button onclick="closeInstModal()" class="p-2 rounded-full bg-washiDark text-sumiLight hover:text-shu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs text-sumiLight mb-3 bg-white px-3 py-2 rounded-xl border border-kinpaku/25">
+        <svg class="w-4 h-4 text-shu shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span id="modal-location">所在地</span>
+      </div>
+
+      <p id="modal-desc" class="text-sm text-sumi leading-relaxed bg-white p-3.5 rounded-xl border border-kinpaku/25 mb-4">
+        機構說明
+      </p>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        <button onclick="goToInstitutionsTab()" class="py-2.5 px-3 rounded-xl bg-washiDark text-kutani font-bold text-xs border border-kutani/20 hover:bg-kutaniLight transition-colors">
+          查看全部 7 大機構
+        </button>
+        <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer"
+          class="py-2.5 px-3 rounded-xl bg-kutani text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm hover:bg-kutani/90 transition-colors">
+          <span>開啟官方參考連結</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 輕量提示吐司 (Toast Message，取代 alert) -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-sumi text-white text-xs font-medium shadow-lg flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-kinpaku"></span>
+    <span id="toast-msg">已儲存筆記</span>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. 完整資料庫：7 大重點見習機構
+    // ==========================================
+    const institutionsData = [
+      {
+        id: 'hakuichi',
+        name: '株式會社箔一',
+        jpName: '株式会社箔一',
+        location: '石川縣金澤市',
+        craft: '金澤金箔',
+        dayRef: 'D11',
+        dayNum: 11,
+        description: '為金澤金箔代表企業，預定辦理金箔製作工序、工廠研修、品質管理、商品化應用及品牌經營等研習內容。',
+        url: 'https://www.hakuichi.co.jp/'
+      },
+      {
+        id: 'fukushima',
+        name: '福島武山工房',
+        jpName: '福島武山工房',
+        location: '石川縣能美市',
+        craft: '九谷燒赤繪細描',
+        dayRef: 'D4',
+        dayNum: 4,
+        description: '為九谷燒赤繪細描代表工房之一，預定辦理赤繪細描技法觀摩、專業導覽及工房交流。',
+        url: 'https://www.instagram.com/fukushima_buzan_kutani/'
+      },
+      {
+        id: 'tougeikou',
+        name: '陶藝晄',
+        jpName: '陶芸晄',
+        location: '石川縣能美市',
+        craft: '九谷燒',
+        dayRef: 'D4',
+        dayNum: 4,
+        description: '為九谷燒相關作家工房，預定辦理九谷燒技法示範、作家交流與工房研修。',
+        url: 'https://kutani-midori.jimdofree.com/'
+      },
+      {
+        id: 'miyayoshi',
+        name: '宮吉製陶',
+        jpName: '株式会社宮吉製陶',
+        location: '石川縣小松市',
+        craft: '九谷燒窯元',
+        dayRef: 'D3',
+        dayNum: 3,
+        description: '為九谷燒窯元，預定辦理窯元營運、製程導覽與實務研修。',
+        url: 'https://miyayoshiseitou.jp/'
+      },
+      {
+        id: 'soukeikai',
+        name: '宗桂會館',
+        jpName: '公益財団法人宗桂会',
+        location: '石川縣金澤市',
+        craft: '加賀象嵌',
+        dayRef: 'D13',
+        dayNum: 13,
+        description: '為加賀象嵌專門美術館與相關推廣據點，預定辦理專業導覽、技法說明與加賀象嵌交流。',
+        url: 'https://www.soukeikai.or.jp/'
+      },
+      {
+        id: 'yamanaka',
+        name: '石川縣立山中漆器產業技術中心',
+        jpName: '石川県立山中漆器産業技術センター',
+        location: '石川縣加賀市',
+        craft: '山中漆器',
+        dayRef: 'D6',
+        dayNum: 6,
+        description: '為日本重要之山中漆器研修設施，預定辦理轆轤車削、蒔繪及相關漆藝研修。',
+        url: 'https://yamanaka696.org/'
+      },
+      {
+        id: 'kinzangama',
+        name: '錦山窯',
+        jpName: '株式会社錦山窯',
+        location: '石川縣小松市',
+        craft: '九谷燒金彩・嘸旦-MUTAN-',
+        dayRef: 'D5',
+        dayNum: 5,
+        description: '為九谷燒重要窯元，並設有展示空間「嘸旦-MUTAN-」，預定辦理展示空間導覽、品牌經營觀察與金彩技法相關交流。',
+        url: 'https://kinzangama.com/'
+      }
+    ];
+
+    // ==========================================
+    // 2. 完整資料庫：17 日每日行程 (116/06/20 - 116/07/06)
+    // 註：民國116年為西元2027年，6/20 為週日，依序推算正確星期
+    // ==========================================
+    const itineraryData = [
+      {
+        day: 1,
+        date: '116/06/20',
+        weekday: '週日',
+        stage: 'kaga',
+        locationTag: '移動・加賀',
+        theme: '啟程前往石川縣・加賀地區入住',
+        activities: [
+          '臺灣 → 小松機場 → 移動至加賀地區・飯店入住，為17日研修揭開序幕。'
+        ],
+        purpose: '',
+        institutions: []
+      },
+      {
+        day: 2,
+        date: '116/06/21',
+        weekday: '週一',
+        stage: 'kaga',
+        locationTag: '加賀・能美',
+        theme: '九谷燒百年色彩體系專業工藝產業導覽與研究',
+        activities: [
+          '能美市九谷燒美術館・五彩館 & 淺藏五十吉紀念館見學',
+          '石川縣九谷燒技術中心（含技術研修所）設施見學'
+        ],
+        purpose: '【九谷五彩之色彩表現與青年獨立支援基礎設施】徹底檢證巨匠名品之美學，以及無鉛和繪具之最新科學研究、支援年輕作家自立之公設育成體系。',
+        institutions: []
+      },
+      {
+        day: 3,
+        date: '116/06/22',
+        weekday: '週二',
+        stage: 'kaga',
+        locationTag: '加賀・小松',
+        theme: '從瓷土到現代窯元',
+        activities: [
+          'CERABO KUTANI（九谷陶瓷實驗室）課堂學習瓷土製造基礎，並進行手捏陶體驗研修',
+          '宮吉製陶（株式会社宮吉製陶）專業工藝產業導覽與研究'
+        ],
+        purpose: '於現代窯元學習窯元營運、製程管理與製作實務。',
+        institutions: ['miyayoshi']
+      },
+      {
+        day: 4,
+        date: '116/06/23',
+        weekday: '週三',
+        stage: 'kaga',
+        locationTag: '加賀・能美',
+        theme: '九谷燒赤繪細描核心實作日',
+        activities: [
+          '石川縣立九谷燒美術館專業導覽',
+          '福島武山工房、陶藝晄（陶芸晄）之工房專業工藝指導與交流'
+        ],
+        purpose: '深入工坊，觀察並體驗赤繪細描等九谷燒代表技法，串聯歷史起源與現代作家實踐。',
+        institutions: ['fukushima', 'tougeikou']
+      },
+      {
+        day: 5,
+        date: '116/06/24',
+        weekday: '週四',
+        stage: 'kaga',
+        locationTag: '加賀・小松',
+        theme: '再興九谷的瓷窯構造與金彩品牌行銷',
+        activities: [
+          '九谷燒窯跡歷史背景說明，現存最古老的九谷燒登窯',
+          '錦山窯（株式会社錦山窯）展示空間「嘸旦-MUTAN-」專業導覽與交流'
+        ],
+        purpose: '【再興九谷之磁器窯構造與極限金彩意匠之品牌經營】上午參觀現存最古老之九谷燒登窯；下午於名門錦山窯「嘸旦」學習傳承 110 餘年之金彩技術，以及昇華為現代藝術・設計之頂級空間美學（工藝行銷）。',
+        institutions: ['kinzangama']
+      },
+      {
+        day: 6,
+        date: '116/06/25',
+        weekday: '週五',
+        stage: 'kaga',
+        locationTag: '加賀市',
+        theme: '山中漆器・轆轤車削與蒔繪之系統驗證',
+        activities: [
+          '石川縣立山中漆器產業技術中心'
+        ],
+        purpose: '【轆轤車削與蒔繪技術之系統驗證】終日駐留公設之專業職人育成機構，徹底調查山中漆器引以為傲之「轆轤車削（ろくろ挽き）」與「蒔繪（蒔絵）」之指導體系與手冊化機制，並接受轆轤車削等之實作指導與驗證。',
+        institutions: ['yamanaka']
+      },
+      {
+        day: 7,
+        date: '116/06/26',
+        weekday: '週六',
+        stage: 'transition',
+        locationTag: '加賀 → 金澤',
+        theme: '城市移動與階段整理',
+        activities: [
+          '加賀 → 移動至金澤・飯店辦理入住',
+          '資料蒐集 / 報告整理'
+        ],
+        purpose: '',
+        institutions: []
+      },
+      {
+        day: 8,
+        date: '116/06/27',
+        weekday: '週日',
+        stage: 'transition',
+        locationTag: '金澤市',
+        theme: '自主調查與第一週統整',
+        activities: [
+          '自由時間：金澤市內自主調查・休息調整',
+          '第一周學習內容整理，包含報告及影片初稿'
+        ],
+        purpose: '',
+        institutions: []
+      },
+      {
+        day: 9,
+        date: '116/06/28',
+        weekday: '週一',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '傳統工藝36業種與現代市場',
+        activities: [
+          '於石川縣立傳統工藝產業館（いしかわ生活工芸ミュージアム）進行特別講座與專業導覽',
+          '專業導覽金澤・Craft 廣坂（クラフト広坂）'
+        ],
+        purpose: '【傳統工藝 36 業種之色彩體系與現代工藝市場調查】綜合學習石川・金澤多樣傳統工藝之基礎知識與現代市場流通。',
+        institutions: []
+      },
+      {
+        day: 10,
+        date: '116/06/29',
+        weekday: '週二',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '高等教育中的技術語言化與公設孵化器',
+        activities: [
+          '金澤美術工藝大學（工藝科）技術交流',
+          '金澤卯辰山工藝工房專業導覽 / 工藝產業研究'
+        ],
+        purpose: '【高等教育中技術之語言化與公設孵化器】驗證高度工藝教育制度與支援年輕作家獨立之基礎設施。由館方導覽，聚焦工藝史脈絡、材料應用、品牌轉譯及地方創生模式，並作為成果報告比較分析素材。',
+        institutions: []
+      },
+      {
+        day: 11,
+        date: '116/06/30',
+        weekday: '週三',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '金箔製造科技與品質管理',
+        activities: [
+          '專業導覽箔一總店、工廠研習',
+          '株式會社箔一'
+        ],
+        purpose: '【金箔製造科技與品質管理】至金箔龍頭企業，學習 1 萬分之 1 毫米的金箔製造工藝流程，以及現代化的品質管理系統、商品化進程。',
+        institutions: ['hakuichi']
+      },
+      {
+        day: 12,
+        date: '116/07/01',
+        weekday: '週四',
+        stage: 'kanazawa',
+        locationTag: '金澤・東山',
+        theme: '傳統工藝×觀光之品牌昇華',
+        activities: [
+          '東山・東茶屋街區域（工藝×觀光）、安江金箔工藝館訪問'
+        ],
+        purpose: '【傳統工藝昇華為觀光經濟之品牌設計】以東茶屋街為模型，學習傳統工藝如何被設計為具魅力之商業・觀光內容。',
+        institutions: []
+      },
+      {
+        day: 13,
+        date: '116/07/02',
+        weekday: '週五',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '加賀象嵌的金屬鑲嵌技法與社群傳承',
+        activities: [
+          '宗桂會館（公益財團法人宗桂会）加賀象嵌專門美術館專業導覽',
+          '加賀象嵌作家工坊交流'
+        ],
+        purpose: '【加賀象嵌之金屬鑲嵌技法與社群傳承】調查金澤舉世聞名之金屬加飾技術「加賀象嵌」之技法與職人間之傳承系統。',
+        institutions: ['soukeikai']
+      },
+      {
+        day: 14,
+        date: '116/07/03',
+        weekday: '週六',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '自由時間',
+        activities: [
+          '自由時間（個人資料整理與市內自主調查）'
+        ],
+        purpose: '為 D16 成果發表整理個人資料，或於金澤市內自主調查。',
+        institutions: []
+      },
+      {
+        day: 15,
+        date: '116/07/04',
+        weekday: '週日',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '成果發表準備及業師面談',
+        activities: [
+          '成果發表準備及業師面談'
+        ],
+        purpose: '彙整翌日發表會之簡報資料，學習內容整理，包含報告及影片初稿提出。',
+        institutions: []
+      },
+      {
+        day: 16,
+        date: '116/07/05',
+        weekday: '週一',
+        stage: 'kanazawa',
+        locationTag: '金澤市',
+        theme: '臺日青年職人的現實課題對話＋成果發表',
+        activities: [
+          '與石川縣傳統青年會議座談會',
+          '成果發表會'
+        ],
+        purpose: '【臺日青年職人之真實課題對話與資料總括・發表】以 15 日研修所累積之資料為基礎發表成果，並與在地青年職人進行討論。',
+        institutions: []
+      },
+      {
+        day: 17,
+        date: '116/07/06',
+        weekday: '週二',
+        stage: 'kanazawa',
+        locationTag: '金澤 → 臺灣',
+        theme: '賦歸',
+        activities: [
+          '金澤市內 → 移動至小松機場 → 返回臺灣'
+        ],
+        purpose: '',
+        institutions: []
+      }
+    ];
+
+    // ==========================================
+    // 3. 應用程式狀態管理 (State & LocalStorage)
+    // ==========================================
+    const STORAGE_KEY = 'kanazawa_m28_notes_v1';
+    let state = {
+      activeTab: 'itinerary',
+      stageFilter: 'all',
+      searchQuery: '',
+      expandedDays: new Set(itineraryData.map(d => d.day)), // 預設全部展開方便瀏覽
+      editingNoteDays: new Set(),
+      notes: loadNotes()
+    };
+
+    function loadNotes() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveNotesToStorage() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.notes));
+      } catch (e) {
+        showToast('瀏覽器儲存空間受限，無法保留筆記');
+      }
+    }
+
+    // ==========================================
+    // 4. 分頁切換與 UI 控制
+    // ==========================================
+    function switchTab(tabName) {
+      state.activeTab = tabName;
+
+      // 切換區塊顯示
+      document.getElementById('view-itinerary').classList.toggle('hidden', tabName !== 'itinerary');
+      document.getElementById('view-institutions').classList.toggle('hidden', tabName !== 'institutions');
+      document.getElementById('view-info').classList.toggle('hidden', tabName !== 'info');
+
+      // 更新導覽列樣式
+      const tabs = ['itinerary', 'institutions', 'info'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (t === tabName) {
+          btn.classList.add('border-shu', 'text-kutani', 'font-bold');
+          btn.classList.remove('border-transparent', 'text-sumiLight', 'font-medium');
+        } else {
+          btn.classList.remove('border-shu', 'text-kutani', 'font-bold');
+          btn.classList.add('border-transparent', 'text-sumiLight', 'font-medium');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // 5. 渲染快速跳轉軸與每日行程卡片
+    // ==========================================
+    function renderDayJumpBar(filteredDays) {
+      const bar = document.getElementById('day-jump-bar');
+      const filteredSet = new Set(filteredDays.map(d => d.day));
+
+      bar.innerHTML = itineraryData.map(item => {
+        const isAvailable = filteredSet.has(item.day);
+        const hasNote = Boolean(state.notes[item.day] && state.notes[item.day].trim());
+        
+        // 階段配色
+        let badgeStyle = 'bg-white text-kutani border-kinpaku/40 hover:bg-kutani hover:text-white';
+        if (!isAvailable) {
+          badgeStyle = 'bg-gray-100 text-gray-400 border-gray-200 opacity-50 pointer-events-none';
+        } else if (item.stage === 'kaga') {
+          badgeStyle = 'bg-white text-kutani border-kutani/30 hover:bg-kutani hover:text-white';
+        } else if (item.stage === 'transition') {
+          badgeStyle = 'bg-kinpakuLight text-kinpakuDark border-kinpaku/50 hover:bg-kinpaku hover:text-white';
+        } else {
+          badgeStyle = 'bg-white text-shu border-shu/30 hover:bg-shu hover:text-white';
+        }
+
+        return `
+          <button onclick="jumpToDay(${item.day})"
+            class="relative shrink-0 px-2.5 py-1 rounded-lg text-xs font-mono font-bold border transition-colors ${badgeStyle}">
+            D${item.day}
+            ${hasNote ? '<span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-shu ring-1 ring-white"></span>' : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function getFilteredItinerary() {
+      const q = state.searchQuery.trim().toLowerCase();
+      return itineraryData.filter(item => {
+        // 1. 階段篩選
+        if (state.stageFilter !== 'all' && item.stage !== state.stageFilter) {
+          return false;
+        }
+        // 2. 關鍵字搜尋
+        if (q) {
+          const instNames = item.institutions
+            .map(id => {
+              const inst = institutionsData.find(i => i.id === id);
+              return inst ? `${inst.name} ${inst.jpName} ${inst.craft}` : '';
+            })
+            .join(' ');
+          const noteText = state.notes[item.day] || '';
+          const searchable = [
+            `day ${item.day}`,
+            `d${item.day}`,
+            item.date,
+            item.weekday,
+            item.locationTag,
+            item.theme,
+            item.activities.join(' '),
+            item.purpose,
+            instNames,
+            noteText
+          ].join(' ').toLowerCase();
+
+          return searchable.includes(q);
+        }
+        return true;
+      });
+    }
+
+    function renderItinerary() {
+      const filtered = getFilteredItinerary();
+      const listEl = document.getElementById('itinerary-list');
+      const emptyEl = document.getElementById('empty-state');
+      const statusBar = document.getElementById('filter-status-bar');
+      const statusText = document.getElementById('filter-status-text');
+
+      renderDayJumpBar(filtered);
+
+      // 篩選提示條
+      if (state.stageFilter !== 'all' || state.searchQuery.trim() !== '') {
+        statusBar.classList.remove('hidden');
+        statusText.textContent = `篩選結果：共 ${filtered.length} 天行程`;
+      } else {
+        statusBar.classList.add('hidden');
+      }
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = '';
+        emptyEl.classList.remove('hidden');
+        return;
+      } else {
+        emptyEl.classList.add('hidden');
+      }
+
+      listEl.innerHTML = filtered.map(item => {
+        const isExpanded = state.expandedDays.has(item.day);
+        const isEditingNote = state.editingNoteDays.has(item.day);
+        const currentNote = state.notes[item.day] || '';
+        const hasNote = currentNote.trim().length > 0;
+
+        // 地點標籤顏色
+        let locBadgeClass = 'bg-kutaniLight text-kutani border-kutani/20';
+        if (item.stage === 'transition') {
+          locBadgeClass = 'bg-kinpakuLight text-kinpakuDark border-kinpaku/30';
+        } else if (item.stage === 'kanazawa') {
+          locBadgeClass = 'bg-shuLight text-shu border-shu/20';
+        }
+
+        // 見習機構快速標籤
+        const instTagsHtml = item.institutions.map(instId => {
+          const inst = institutionsData.find(i => i.id === instId);
+          if (!inst) return '';
+          return `
+            <button onclick="openInstModal('${inst.id}')"
+              class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold bg-kinpakuLight text-kinpakuDark border border-kinpaku/50 hover:bg-kinpaku hover:text-white transition-colors shadow-2xs">
+              <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 21h18M5 21V7l8-4 8 4v14M9 21v-6h6v6"></path>
+              </svg>
+              <span>見習機構：${inst.name}</span>
+              <span class="text-[10px] opacity-80">↗</span>
+            </button>
+          `;
+        }).join('');
+
+        return `
+          <article id="day-card-${item.day}" class="bg-white rounded-2xl shadow-washi border border-kinpaku/30 overflow-hidden transition-all">
+            <!-- 卡片頭部：點擊可展開/收合 -->
+            <div onclick="toggleDayCard(${item.day})" class="p-4 cursor-pointer select-none active:bg-washiDark/40 transition-colors">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <div class="flex items-center flex-wrap gap-2">
+                  <!-- Day 標籤 -->
+                  <span class="px-2.5 py-0.5 rounded-lg bg-kutani text-white font-mono text-xs font-bold tracking-wide">
+                    Day ${item.day}
+                  </span>
+                  <!-- 日期與星期 -->
+                  <span class="text-xs font-medium text-sumiLight font-mono">
+                    ${item.date}（${item.weekday}）
+                  </span>
+                  <!-- 地點標籤 -->
+                  <span class="px-2 py-0.5 rounded-md text-[11px] font-bold border ${locBadgeClass}">
+                    ${item.locationTag}
+                  </span>
+                </div>
+
+                <!-- 展開/收合箭頭 -->
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${hasNote ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-shuLight text-shu font-bold">有筆記</span>' : ''}
+                  <svg class="w-5 h-5 text-sumiLight transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 主題標題 -->
+              <h3 class="font-serif font-bold text-base sm:text-lg text-sumi leading-snug">
+                ${item.theme}
+              </h3>
+            </div>
+
+            <!-- 卡片展開內容區 -->
+            <div class="${isExpanded ? 'block' : 'hidden'} px-4 pb-4 pt-1 border-t border-washiDark space-y-3.5">
+              
+              <!-- 具體行程內容 -->
+              <div class="pt-2">
+                <div class="text-[11px] font-bold text-sumiLight uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-kutani"></span>
+                  當日行程內容
+                </div>
+                <ul class="space-y-1.5 text-sm text-sumi leading-relaxed">
+                  ${item.activities.map(act => `
+                    <li class="flex items-start gap-2">
+                      <span class="text-kinpakuDark font-bold mt-0.5">•</span>
+                      <span>${act}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+
+              <!-- 學習目的高亮小區塊 -->
+              ${item.purpose ? `
+                <div class="p-3.5 rounded-xl bg-kutaniLight/70 border-l-4 border-kutani">
+                  <div class="text-xs font-bold text-kutani mb-1 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    學習目的
+                  </div>
+                  <p class="text-xs sm:text-sm text-sumi leading-relaxed">
+                    ${item.purpose}
+                  </p>
+                </div>
+              ` : ''}
+
+              <!-- 當天對應見習機構快速標籤 -->
+              ${instTagsHtml ? `
+                <div class="flex flex-wrap gap-2 pt-0.5">
+                  ${instTagsHtml}
+                </div>
+              ` : ''}
+
+              <!-- 個人隨手筆記 / 備忘區 (localStorage) -->
+              <div class="pt-2 border-t border-dashed border-kinpaku/40">
+                ${!isEditingNote && !hasNote ? `
+                  <button onclick="openNoteEditor(${item.day})"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-sumiLight bg-washi hover:bg-washiDark hover:text-kutani border border-kinpaku/30 transition-colors">
+                    <span>＋ 隨手筆記（集合時間 / 攜帶物品 / 心得）</span>
+                  </button>
+                ` : ''}
+
+                ${!isEditingNote && hasNote ? `
+                  <div class="p-3 rounded-xl bg-kinpakuLight/60 border border-kinpaku/40">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="text-[11px] font-bold text-kinpakuDark flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        我的隨手筆記
+                      </span>
+                      <button onclick="openNoteEditor(${item.day})" class="text-xs font-bold text-kutani hover:underline px-1.5 py-0.5">
+                        編輯
+                      </button>
+                    </div>
+                    <p class="text-xs text-sumi whitespace-pre-wrap leading-relaxed">${escapeHtml(currentNote)}</p>
+                  </div>
+                ` : ''}
+
+                ${isEditingNote ? `
+                  <div class="p-3 rounded-xl bg-washi border border-kutani/30 space-y-2">
+                    <label class="block text-xs font-bold text-kutani">Day ${item.day} 隨手筆記（自動儲存於本機手機）</label>
+                    <textarea id="note-textarea-${item.day}" rows="3"
+                      placeholder="輸入集合時間、要帶的護具/相機、或當日研修重點..."
+                      class="w-full p-2.5 text-xs bg-white rounded-lg border border-kinpaku/50 text-sumi focus:outline-none focus:ring-2 focus:ring-kutani/30">${escapeHtml(currentNote)}</textarea>
+                    <div class="flex items-center justify-end gap-2">
+                      ${hasNote ? `
+                        <button onclick="deleteNote(${item.day})" class="mr-auto text-xs text-shu hover:underline px-2 py-1">
+                          清除筆記
+                        </button>
+                      ` : ''}
+                      <button onclick="cancelNoteEditor(${item.day})" class="px-3 py-1.5 rounded-lg text-xs font-medium text-sumiLight bg-white border border-gray-200">
+                        取消
+                      </button>
+                      <button onclick="saveNote(${item.day})" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-kutani shadow-xs">
+                        儲存筆記
+                      </button>
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // 6. 渲染分頁二：7 大見習機構列表
+    // ==========================================
+    function renderInstitutions() {
+      const container = document.getElementById('institutions-list');
+      container.innerHTML = institutionsData.map((inst, index) => {
+        return `
+          <div class="bg-white rounded-2xl p-4 shadow-washi border border-kinpaku/35 relative overflow-hidden">
+            <!-- 右上角金箔編號裝飾 -->
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-kutaniLight text-kutani border border-kutani/20">
+                ${inst.craft}
+              </span>
+              <button onclick="jumpFromInstitutionToDay(${inst.dayNum})"
+                class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-shuLight text-shu border border-shu/25 hover:bg-shu hover:text-white transition-colors">
+                <span>對應行程：${inst.dayRef}</span>
+                <span>→</span>
+              </button>
+            </div>
+
+            <!-- 機構名稱與日文名 -->
+            <div class="mb-2">
+              <h3 class="font-serif text-lg font-bold text-sumi">
+                ${index + 1}. ${inst.name}
+              </h3>
+              <p class="text-xs text-sumiLight font-medium mt-0.5">
+                日文名稱：${inst.jpName}
+              </p>
+            </div>
+
+            <!-- 所在地標籤 -->
+            <div class="inline-flex items-center gap-1.5 text-xs text-sumiLight bg-washi px-2.5 py-1 rounded-lg border border-kinpaku/25 mb-3">
+              <svg class="w-3.5 h-3.5 text-kinpakuDark shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>${inst.location}</span>
+            </div>
+
+            <!-- 研習內容說明 -->
+            <p class="text-xs sm:text-sm text-sumi leading-relaxed mb-4">
+              ${inst.description}
+            </p>
+
+            <!-- 底部操作按鈕 -->
+            <div class="pt-3 border-t border-washiDark flex items-center justify-between gap-2">
+              <button onclick="jumpFromInstitutionToDay(${inst.dayNum})"
+                class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-kutani bg-washi hover:bg-kutaniLight border border-kutani/20 transition-colors">
+                查看 ${inst.dayRef} 行程詳情
+              </button>
+              <a href="${inst.url}" target="_blank" rel="noopener noreferrer"
+                class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-white bg-kutani hover:bg-kutani/90 flex items-center justify-center gap-1.5 shadow-2xs transition-colors">
+                <span>官方網站 / 社群</span>
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ==========================================
+    // 7. 互動功能函式 (篩選、搜尋、跳轉、筆記、彈窗)
+    // ==========================================
+    function setStageFilter(stage) {
+      state.stageFilter = stage;
+      document.querySelectorAll('.stage-pill').forEach(btn => {
+        if (btn.dataset.stage === stage) {
+          btn.classList.add('bg-kutani', 'text-white', 'font-bold', 'shadow-sm');
+          btn.classList.remove('bg-white', 'text-sumi', 'font-medium');
+        } else {
+          btn.classList.remove('bg-kutani', 'text-white', 'font-bold', 'shadow-sm');
+          btn.classList.add('bg-white', 'text-sumi', 'font-medium');
+        }
+      });
+      renderItinerary();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val;
+      const clearBtn = document.getElementById('clear-search-btn');
+      clearBtn.classList.toggle('hidden', val.trim() === '');
+      // 搜尋時自動展開符合的卡片，方便手機直接看內容
+      if (val.trim() !== '') {
+        itineraryData.forEach(d => state.expandedDays.add(d.day));
+      }
+      renderItinerary();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      input.value = '';
+      handleSearch('');
+    }
+
+    function resetAllFilters() {
+      state.searchQuery = '';
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      setStageFilter('all');
+    }
+
+    function toggleDayCard(dayNum) {
+      if (state.expandedDays.has(dayNum)) {
+        state.expandedDays.delete(dayNum);
+      } else {
+        state.expandedDays.add(dayNum);
+      }
+      renderItinerary();
+    }
+
+    function toggleAllDays(expand) {
+      if (expand) {
+        itineraryData.forEach(d => state.expandedDays.add(d.day));
+      } else {
+        state.expandedDays.clear();
+      }
+      renderItinerary();
+    }
+
+    function jumpToDay(dayNum) {
+      // 確保卡片是展開的
+      state.expandedDays.add(dayNum);
+      renderItinerary();
+
+      setTimeout(() => {
+        const card = document.getElementById(`day-card-${dayNum}`);
+        const nav = document.getElementById('sticky-nav');
+        if (card) {
+          const navHeight = nav ? nav.offsetHeight : 56;
+          const topPos = card.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+          window.scrollTo({ top: topPos, behavior: 'smooth' });
+          card.classList.remove('highlight-card');
+          void card.offsetWidth; // 觸發重繪以重播動畫
+          card.classList.add('highlight-card');
+        }
+      }, 60);
+    }
+
+    function jumpFromInstitutionToDay(dayNum) {
+      switchTab('itinerary');
+      // 若目前有篩選條件導致該天被隱藏，自動重設篩選
+      if (state.stageFilter !== 'all' || state.searchQuery !== '') {
+        resetAllFilters();
+      }
+      jumpToDay(dayNum);
+    }
+
+    // 隨手筆記操作
+    function openNoteEditor(dayNum) {
+      state.editingNoteDays.add(dayNum);
+      renderItinerary();
+      setTimeout(() => {
+        const ta = document.getElementById(`note-textarea-${dayNum}`);
+        if (ta) ta.focus();
+      }, 50);
+    }
+
+    function cancelNoteEditor(dayNum) {
+      state.editingNoteDays.delete(dayNum);
+      renderItinerary();
+    }
+
+    function saveNote(dayNum) {
+      const ta = document.getElementById(`note-textarea-${dayNum}`);
+      if (!ta) return;
+      const text = ta.value.trim();
+      if (text) {
+        state.notes[dayNum] = text;
+        showToast(`已儲存 Day ${dayNum} 隨手筆記`);
+      } else {
+        delete state.notes[dayNum];
+        showToast(`已清除 Day ${dayNum} 筆記`);
+      }
+      saveNotesToStorage();
+      state.editingNoteDays.delete(dayNum);
+      renderItinerary();
+    }
+
+    function deleteNote(dayNum) {
+      delete state.notes[dayNum];
+      saveNotesToStorage();
+      state.editingNoteDays.delete(dayNum);
+      renderItinerary();
+      showToast(`已刪除 Day ${dayNum} 筆記`);
+    }
+
+    // 機構快速簡介 Modal
+    function openInstModal(instId) {
+      const inst = institutionsData.find(i => i.id === instId);
+      if (!inst) return;
+      document.getElementById('modal-craft-tag').textContent = `${inst.craft}｜對應 ${inst.dayRef}`;
+      document.getElementById('modal-title').textContent = inst.name;
+      document.getElementById('modal-jp-name').textContent = `日文名稱：${inst.jpName}`;
+      document.getElementById('modal-location').textContent = inst.location;
+      document.getElementById('modal-desc').textContent = inst.description;
+      document.getElementById('modal-link').href = inst.url;
+      document.getElementById('inst-modal').classList.remove('hidden');
+    }
+
+    function closeInstModal(e) {
+      if (!e || e.target.id === 'inst-modal') {
+        document.getElementById('inst-modal').classList.add('hidden');
+      }
+    }
+
+    function goToInstitutionsTab() {
+      closeInstModal();
+      switchTab('institutions');
+    }
+
+    // 工具函式
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('hidden');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2200);
+    }
+
+    // 初始化渲染
+    window.addEventListener('DOMContentLoaded', () => {
+      renderItinerary();
+      renderInstitutions();
+    });
+  </script>
+</body>
+</html>
